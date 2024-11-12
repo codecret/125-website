@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        cascadia: ["var(--cascadia)"],
+      },
       colors: {
         backgroundImage: {
           "custom-gradient":

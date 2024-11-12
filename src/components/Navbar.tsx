@@ -17,13 +17,13 @@ export default function Navbar({ toggleTheme, dark }) {
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/">
-            <h1 className="text-3xl font-bold text-black dark:text-white">
+            <h1 className="text-3xl font-bold text-white dark:text-white">
               125
             </h1>
           </Link>
           <div className="md:hidden">
             <button
-              className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
+              className="text-white-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
               onClick={() => setState(!state)}
             >
               <Menu />
@@ -35,11 +35,11 @@ export default function Navbar({ toggleTheme, dark }) {
             state ? "block" : "hidden"
           }`}
         >
-          <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0 mr-6">
+          <ul className="ml-5 items-center space-y-8 md:flex md:space-x-6 md:space-y-0 mr-6">
             {menus.map((item, idx) => (
               <li
                 key={idx}
-                className="text-gray-600 hover:text-black dark:hover:text-slate-200"
+                className="text-white hover:text-gray-400 dark:hover:text-slate-200"
               >
                 <Link href={item.path}>{item.title}</Link>
               </li>
