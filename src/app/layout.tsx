@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} ${cascadia.variable} ${balooBhaijaan2.className} font-robotto antialiased`}
+        className={`${roboto.className} ${cascadia.variable} ${balooBhaijaan2.className} font-robotto antialiased `}
       >
         {children}
       </body>

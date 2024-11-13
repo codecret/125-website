@@ -13,6 +13,8 @@ const MyProject = () => {
     "/project4.png",
     "/project5.png",
     "/project6.png",
+    "/project6.png",
+    "/project6.png",
   ];
   return (
     <div
@@ -20,7 +22,6 @@ const MyProject = () => {
       ref={emblaRef}
     >
       {imageSources.slice(0, 4).map((ele, index) => (
-        // relative
         <div className="relative embla__slide rounded-3xl" key={index}>
           <Image
             src={ele}
@@ -31,7 +32,6 @@ const MyProject = () => {
           />
         </div>
       ))}
-      {/* </div> */}
     </div>
   );
 };

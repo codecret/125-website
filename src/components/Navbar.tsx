@@ -13,7 +13,7 @@ export default function Navbar({ toggleTheme, dark }) {
   ];
 
   return (
-    <nav className=" w-full border-b md:border-0 dark:bg-black z-10">
+    <nav className=" w-full border-b md:border-0 z-10">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/">
@@ -51,7 +51,7 @@ export default function Navbar({ toggleTheme, dark }) {
               className="dark:block"
               onClick={toggleTheme}
             >
-              {dark ? <Sun /> : <Moon color="black" />}
+              {dark ? <Sun color="white" /> : <Moon color="white" />}
             </button>
           </ul>
         </div>

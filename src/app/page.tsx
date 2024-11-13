@@ -1,12 +1,12 @@
 "use client";
-import Navbar from "@/components/Navbar";
-import { Roboto } from "next/font/google";
 import { useState } from "react";
 import Hero from "../components/Hero";
 import Pricing from "../components/Pricing";
 import Testimonials from "../components/Testimonials";
 import ContactUs from "@/components/ContactUs";
 import MyProject from "@/components/MyProject";
+import EmblaCarousel from "@/components/embla/EmblaCarousel";
+import { EmblaOptionsType } from "embla-carousel";
 
 export default function Home() {
   const [dark, setDark] = useState(false);
@@ -15,11 +15,22 @@ export default function Home() {
     setDark(!dark);
     document.body.classList.toggle("dark");
   };
-
+  const OPTIONS: EmblaOptionsType = { loop: true };
+  const imageSources = [
+    "/project1.png",
+    "/project2.png",
+    "/project3.png",
+    "/project4.png",
+    "/project5.png",
+    "/project6.png",
+    "/project6.png",
+    "/project6.png",
+  ];
   return (
     <div>
       <Hero toggleTheme={toggleTheme} dark={dark} />
-      <MyProject />
+      <EmblaCarousel slides={imageSources} options={OPTIONS} />
+      {/* <MyProject /> */}
       <Pricing />
       <Testimonials />
       <ContactUs />

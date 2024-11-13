@@ -50,7 +50,7 @@ import { motion } from "framer-motion";
 const Pricing = () => {
   return (
     <section className="">
-      <div className="container p-5 md:p-16 md:py-0 mx-auto">
+      <div className="container p-5 md:p-16 md:py-0 mx-auto md:pb-16">
         <div className="max-w-[540px] mx-auto">
           <h2 className="section-title">Pricing</h2>
           <p className="section-description mt-5">
@@ -115,8 +115,6 @@ const Pricing = () => {
                 </button>
                 <ul className="flex flex-col gap-5 mt-8">
                   {features.map((feature, index) => {
-                    console.log(feature);
-
                     return (
                       <li
                         key={index}

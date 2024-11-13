@@ -12,7 +12,7 @@ import Navbar from "./Navbar";
 const Hero = ({ toggleTheme, dark }) => {
   return (
     <section className="">
-      <div className="relative dark:bg-black-800 h-[calc(100vh-200px)] flex flex-col justify-center items-center overflow-hidden bg-[#0b1591] rounded-b-[50px] backgroundblue">
+      <div className="relative h-[calc(100vh-200px)] flex flex-col justify-center items-center overflow-hidden bg-[#0b1591] rounded-b-[50px] backgroundblue">
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-10"
           style={{
