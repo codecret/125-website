@@ -15,19 +15,25 @@ const TWEEN_FACTOR_BASE = 0.84;
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
-type PropType = {
-  slides: number[];
-  options?: EmblaOptionsType;
+type Slide = {
+  videoLink: string;
+  canPlay: boolean;
 };
+
+interface EmblaCarouselProps {
+  slides: Slide[];
+  options?: any;
+}
+
 // Split array into chunks of 4
 const chunkArray = (arr, size) => {
-  const result = [];
+  const result: any = [];
   for (let i = 0; i < arr.length; i += size) {
     result.push(arr.slice(i, i + size));
   }
   return result;
 };
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const EmblaCarousel = (props) => {
   const { slides, options } = props;
   const imageChunks = chunkArray(slides, 4);
 

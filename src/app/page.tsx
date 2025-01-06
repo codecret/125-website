@@ -7,10 +7,9 @@ import ContactUs from "@/components/ContactUs";
 import EmblaCarousel from "@/components/embla/EmblaCarousel";
 import Footer from "@/components/Footer";
 import { EmblaOptionsType } from "embla-carousel";
-import Image from "next/image";
 
 export default function Home() {
-  const [dark, setDark] = useState();
+  const [dark, setDark] = useState(false);
 
   const toggleTheme = () => {
     setDark(!dark);
