@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Arima, Roboto } from "next/font/google";
+import { Arima, Roboto, Shrikhand } from "next/font/google";
 
 const mainFont = Arima({
   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -14,6 +14,12 @@ const roboto = Roboto({
   subsets: ["latin"],
   display: "swap",
   variable: "--roboto",
+});
+const shrinkHand = Shrikhand({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--shrinkHand",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mainFont.variable} ${roboto.variable} font-roboto antialiased `}
+        className={`${mainFont.variable} ${shrinkHand.variable} ${roboto.variable} font-roboto antialiased `}
       >
         {children}
       </body>

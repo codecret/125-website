@@ -50,9 +50,8 @@ const pricingData = [
   },
 ];
 import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
 import { CheckIcon } from "lucide-react";
-import { useInView } from "motion/react";
+import { useInView, motion } from "motion/react";
 import { useEffect, useRef } from "react";
 
 const Pricing = () => {
@@ -63,19 +62,23 @@ const Pricing = () => {
     console.log("Element is in view: ", isInView);
   }, [isInView]);
   return (
-    <section className="mt-24">
+    <motion.section
+      className="mt-24"
+      viewport={{ once: true }}
+      initial={{ y: -70 }}
+      ref={ref}
+    >
       <div className="container p-5 md:p-16 md:py-0 mx-auto md:pb-16">
         <div className="max-w-[540px] mx-auto">
-          <h2 className="section-title-one">Pricing</h2>
+          <h2 className="section-title-one" ref={container}>
+            Pricing
+          </h2>
           <p className="section-description mt-5">
             Free forever. Upgrade for unlimited tasks, better security, and
             exclusive features.
           </p>
         </div>
-        <div
-          className="flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center"
-          ref={container}
-        >
+        <div className="flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center">
           {pricingData.map(
             (
               {
@@ -92,7 +95,6 @@ const Pricing = () => {
             ) => (
               <motion.div
                 key={index}
-                ref={ref}
                 className={twMerge(
                   "card",
                   inverse === true && "border-white bg-primary text-white/60"
@@ -176,7 +178,7 @@ const Pricing = () => {
           )}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

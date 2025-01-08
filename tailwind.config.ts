@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         main: ["var(--arima)"],
         roboto: ["var(--roboto)"],
+        shrinkHand: ["var(--shrinkHand)"],
       },
       colors: {
         backgroundImage: {

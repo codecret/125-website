@@ -21,14 +21,14 @@ export default function Navbar({ toggleTheme, dark }) {
               125
             </h1>
           </Link>
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <button
               className="text-white outline-none p-2 rounded-md focus:border-gray-400 focus:border"
               onClick={() => setState(!state)}
             >
               <Menu />
             </button>
-          </div>
+          </div> */}
         </div>
         <div
           className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${

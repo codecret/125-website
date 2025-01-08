@@ -5,10 +5,10 @@ import {
   EmblaOptionsType,
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import { usePrevNextButtons } from "./EmblaCarouselArrowButtons";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButtons";
 import GridComponent from "./GridComponent";
 import Ellipse from "../EllipseBackground";
+import Image from "next/image";
 
 const TWEEN_FACTOR_BASE = 0.84;
 
@@ -42,13 +42,6 @@ const EmblaCarousel = (props) => {
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =
     useDotButton(emblaApi);
-
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = usePrevNextButtons(emblaApi);
 
   const setTweenFactor = useCallback((emblaApi: EmblaCarouselType) => {
     tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length;
@@ -107,29 +100,17 @@ const EmblaCarousel = (props) => {
   }, [emblaApi, tweenOpacity]);
 
   return (
-    // bg-gradient-to-b from-[#FFFFFF] to-[#D2DCFF]
     <div className="relative">
-      <Ellipse
-        width="50%"
-        height="50%"
-        rx={300}
-        ry={300}
-        className="absolute left-0 -translate-x-[60%]"
-      />
-      <Ellipse
-        width="50%"
-        height="50%"
-        rx={300}
-        ry={300}
-        className="absolute right-0 translate-x-[60%]"
-      />
-      {/* <Ellipse
-        width="50%"
-        height="50%"
-        rx={100}
-        ry={100}
-        className="absolute right-0"
-      /> */}
+      <div className="absolute w-[1200px] h-[700px] opacity-10 top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
+        <Image
+          className=" absolute top-1/2"
+          fill
+          objectFit="cover"
+          // objectFit="cover bg-repeat"
+          src="/grid.png"
+          alt="background image"
+        />
+      </div>
       <div className="embla mx-auto py-24">
         <h1 className={`section-title-one `}>Our Projects</h1>
         <div className="embla__viewport" ref={emblaRef}>
