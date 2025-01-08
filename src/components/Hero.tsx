@@ -12,7 +12,7 @@ const Hero = ({ toggleTheme, dark }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   return (
     <motion.div
-      style={{ scale }}
+      style={{ scale: scale as any }}
       className="no-scrollbar"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
