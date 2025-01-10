@@ -2,48 +2,58 @@
 const pricingData = [
   {
     title: "Basic Plan",
-    monthlyPrice: 100,
-    buttonText: "Get Started for free",
+    monthlyPrice: 200,
+    buttonText: "Get Started for Free",
     popular: false,
     inverse: false,
     features: [
-      "Up to 5 project members",
-      "unlimited tasks and projects",
-      "2GB storage",
-      "integrations",
-      "Basic support",
+      "1 Custom Website Design",
+      "Up to 5 pages",
+      "Basic SEO optimization",
+      "Mobile responsiveness",
+      "Cross-Browser Support",
+      "Email support",
+      "1-year free domain",
+      "Lifetime free SSL certificate",
     ],
     x: 400,
     xlast: 0,
   },
   {
     title: "Business Plan",
-    monthlyPrice: 10,
-    buttonText: "Sign up now",
+    monthlyPrice: 500,
+    buttonText: "Get Started Now",
     popular: true,
     inverse: true,
     features: [
-      "Up to 5 project members",
-      "unlimited tasks and projects",
-      "2GB storage",
-      "integrations",
-      "Basic support",
+      "Includes Basic Plan",
+      "Custom Website Design",
+      "Advanced SEO",
+      "Performance Optimization",
+      "Custom Code Functionality",
+      "Advanced Analytics Integration",
+      "Priority Email Support",
+      "Content Management System (CMS)",
+      "Team Collaboration Features",
     ],
     x: -200,
     xlast: 0,
   },
   {
     title: "Stores Plan",
-    monthlyPrice: 19,
-    buttonText: "Sign up now",
+    monthlyPrice: 400,
+    buttonText: "Get Started Now",
     popular: false,
     inverse: false,
     features: [
-      "Up to 5 project members",
-      "unlimited tasks and projects",
-      "2GB storage",
-      "integrations",
-      "Basic support",
+      "Includes Basic Plan",
+      "Custom Website Design",
+      "Premium SEO",
+      "Inventory Management",
+      "E-commerce Setup & Integration",
+      "Advanced Analytics & Reporting",
+      "Dedicated Project Manager Support",
+      "Priority Email Support",
     ],
     x: -400,
     xlast: 0,
@@ -57,7 +67,7 @@ import { useEffect, useRef } from "react";
 const Pricing = () => {
   const container = useRef(null);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref);
   useEffect(() => {
     console.log("Element is in view: ", isInView);
   }, [isInView]);
@@ -105,7 +115,7 @@ const Pricing = () => {
                     ? `translateX(${xlast}px)`
                     : `translateX(${x}px)`,
                   opacity: isInView ? 1 : 0,
-                  transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+                  transition: "all 0.9s ease 0.5s",
                 }}
               >
                 <div className="flex justify-between">
@@ -167,7 +177,7 @@ const Pricing = () => {
                           inverse === true && "text-white"
                         )}
                       >
-                        <CheckIcon className="h-6 w-6" />
+                        <CheckIcon size={24} />
                         <span>{feature}</span>
                       </li>
                     );

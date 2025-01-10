@@ -17,7 +17,7 @@ export default function Navbar({ toggleTheme, dark }) {
       <div className="items-center px-4 max-w-screen-xl mx-8 md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/">
-            <h1 className="text-3xl font-bold text-white dark:text-white">
+            <h1 className="text-3xl font-bold text-white dark:text-white font-shrinkHand">
               125
             </h1>
           </Link>
