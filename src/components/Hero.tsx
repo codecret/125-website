@@ -4,11 +4,24 @@ import * as motion from "motion/react-client";
 import React from "react";
 import Navbar from "./Navbar";
 import { Icon } from "@iconify/react";
-import { useScroll, useTransform } from "framer-motion";
+import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 const Hero = ({ toggleTheme, dark }) => {
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0, 0.08], [1, 1.05]);
+
+  // useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  //   console.log("######");
+
+  //   console.log("Page scroll: ", latest);
+  //   console.log(scrollYProgress.current);
+  //   console.log(scale.current);
+  //   console.log("######");
+  // });
+
   return (
     <motion.div
+      style={{ scale: scale as any }}
       className="no-scrollbar"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -17,7 +30,9 @@ const Hero = ({ toggleTheme, dark }) => {
         ease: "easeInOut",
       }}
     >
-      <motion.div className="relative h-[calc(100vh-400px)] md:h-[calc(100vh-150px)] flex flex-col justify-center items-center overflow-hidden bg-primary rounded-[40px] m-2 backgroundblue ">
+      {/* rounded-b-[50px] */}
+      {/* 0b1591 */}
+      <motion.div className="relative h-[calc(100vh-400px)] md:h-[calc(100vh-150px)] flex flex-col justify-center items-center overflow-hidden bg-[#2F367E] rounded-[40px] m-2">
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20"
           style={{
