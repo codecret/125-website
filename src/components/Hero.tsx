@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import { Icon } from "@iconify/react";
 import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
-const Hero = ({ toggleTheme, dark }) => {
+const Hero = ({ toggleTheme, dark, refVar }) => {
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 0.08], [1, 1.05]);
 
@@ -32,7 +32,7 @@ const Hero = ({ toggleTheme, dark }) => {
     >
       {/* rounded-b-[50px] */}
       {/* 0b1591 */}
-      <motion.div className="relative h-[calc(100vh-400px)] md:h-[calc(100vh-150px)] flex flex-col justify-center items-center overflow-hidden bg-[#2F367E] rounded-[40px] m-2">
+      <motion.div className="relative h-[calc(100vh-400px)] md:h-[calc(100vh-150px)] flex flex-col justify-center items-center overflow-hidden bg-primary rounded-[40px] m-2 backgroundblue">
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20"
           style={{
