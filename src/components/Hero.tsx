@@ -36,7 +36,7 @@ const Hero = ({ toggleTheme, dark, refVar }) => {
         <div
           className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-20"
           style={{
-            backgroundImage: "url('/codingwallpaper.gif')",
+            backgroundImage: "url('/codingwallpaperoptimized.gif')",
           }}
         ></div>
         {/* [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] */}
