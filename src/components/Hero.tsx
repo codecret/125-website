@@ -8,7 +8,7 @@ import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 
 const Hero = ({ toggleTheme, dark, refVar }) => {
   const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0, 0.08], [1, 1.05]);
+  const scale = useTransform(scrollYProgress, [0, 0.08], [0.99, 1.05]);
 
   // useMotionValueEvent(scrollYProgress, "change", (latest) => {
   //   console.log("######");
@@ -24,7 +24,7 @@ const Hero = ({ toggleTheme, dark, refVar }) => {
       style={{ scale: scale as any }}
       className="no-scrollbar"
       initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
+      animate={{ opacity: 1, scale: 0.99 }}
       transition={{
         duration: 0.9,
         ease: "easeInOut",
