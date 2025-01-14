@@ -1,7 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "motion/react";
-
+interface EventTarget {
+  value: any;
+}
 const GridComponent = ({ elements }) => {
   return (
     <div className="relative w-full grid md:grid-cols-2 gap-4 bg-transparent p-5">
@@ -26,10 +28,14 @@ const GridComponent = ({ elements }) => {
                 loop
                 muted
                 preload="metadata"
-                onMouseEnter={(e) => e.target.play()}
-                onMouseLeave={(e) => {
-                  e.target.pause();
-                  e.target.currentTime = 0;
+                onMouseEnter={(e: React.MouseEvent<HTMLVideoElement>) => {
+                  const target = e.target as HTMLVideoElement;
+                  target.play();
+                }}
+                onMouseLeave={(e: React.MouseEvent<HTMLVideoElement>) => {
+                  const target = e.target as HTMLVideoElement;
+                  target.pause();
+                  target.currentTime = 0;
                 }}
               >
                 <source src="/orseda.mp4" type="video/mp4" />

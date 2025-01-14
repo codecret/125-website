@@ -24,7 +24,10 @@ const EmblaCarousel1 = ({ slides }) => {
       </p>
       <div className="flex gap-7 justify-center overflow-scroll max-w-screen">
         {slides.map((ele, index) => (
-          <div className="absolute min-w-[300px] h-[230px] rounded-lg">
+          <div
+            key={index}
+            className="absolute min-w-[300px] h-[230px] rounded-lg"
+          >
             <Image
               src={ele.videoLink}
               fill

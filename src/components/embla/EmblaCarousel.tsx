@@ -33,10 +33,7 @@ const EmblaCarousel = (props) => {
   const { slides, options } = props;
   const imageChunks = chunkArray(slides, 4);
   const ref = useRef(null);
-  const isInView = useInView(ref, {
-    threshold: 0.5,
-    rootMargin: "-100px 0px -100px 0px",
-  });
+  const isInView = useInView(ref);
 
   useEffect(() => {
     console.log("Element is in view: ", isInView);
