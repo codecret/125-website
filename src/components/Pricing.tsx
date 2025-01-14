@@ -72,12 +72,7 @@ const Pricing = () => {
     console.log("Element is in view: ", isInView);
   }, [isInView]);
   return (
-    <motion.section
-      className="mt-24"
-      viewport={{ once: true }}
-      initial={{ y: -70 }}
-      ref={ref}
-    >
+    <motion.section className="mt-24" initial={{ y: -70 }} ref={ref}>
       <div className="container p-5 md:p-16 md:py-0 mx-auto md:pb-16">
         <div className="max-w-[540px] mx-auto">
           <h2 className="section-title-one" ref={container}>
@@ -115,7 +110,7 @@ const Pricing = () => {
                     ? `translateX(${xlast}px)`
                     : `translateX(${x}px)`,
                   opacity: isInView ? 1 : 0,
-                  transition: "all 0.9s ease 0.5s",
+                  transition: "all 0.9s ease-in-out 0.5s",
                 }}
               >
                 <div className="flex justify-between">

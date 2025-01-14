@@ -1,14 +1,10 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import {
-  EmblaCarouselType,
-  EmblaEventType,
-  EmblaOptionsType,
-} from "embla-carousel";
+import { EmblaCarouselType, EmblaEventType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButtons";
 import GridComponent from "./GridComponent";
-import Ellipse from "../EllipseBackground";
 import Image from "next/image";
+import { motion, useInView, useScroll } from "motion/react";
 
 const TWEEN_FACTOR_BASE = 0.84;
 
@@ -36,7 +32,15 @@ const chunkArray = (arr, size) => {
 const EmblaCarousel = (props) => {
   const { slides, options } = props;
   const imageChunks = chunkArray(slides, 4);
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    threshold: 0.5,
+    rootMargin: "-100px 0px -100px 0px",
+  });
 
+  useEffect(() => {
+    console.log("Element is in view: ", isInView);
+  }, [isInView]);
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const tweenFactor = useRef(0);
 
@@ -100,7 +104,7 @@ const EmblaCarousel = (props) => {
   }, [emblaApi, tweenOpacity]);
 
   return (
-    <div className="relative">
+    <div className="relative md:mt-12">
       <div className="absolute w-[1200px] h-[700px] opacity-10 top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
         <Image
           className=" absolute top-1/2"
@@ -112,16 +116,38 @@ const EmblaCarousel = (props) => {
         />
       </div>
       <div className="embla mx-auto py-24">
-        <h1 className={`section-title-one `}>Our Projects</h1>
-        <div className="embla__viewport" ref={emblaRef}>
-          <div className="shadow-2xl embla__container">
+        <motion.h1
+          className={`section-title-one`}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={
+            isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }
+          }
+          transition={{
+            duration: 1,
+            ease: "easeInOut",
+            // scale: { type: "", visualDuration: 0.4, bounce: 0.5 },
+          }}
+        >
+          Our Projects
+        </motion.h1>
+        <motion.div
+          className="embla__viewport"
+          ref={emblaRef}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{
+            duration: 1.5,
+            ease: "easeInOut",
+          }}
+        >
+          <div className="shadow-2xl embla__container" ref={ref}>
             {imageChunks.map((chunk, index) => (
               <div className="shadow-2xl embla__slide" key={index}>
                 <GridComponent elements={chunk} />
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         <div className="embla__controls">
           <div className="embla__dots">

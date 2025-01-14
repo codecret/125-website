@@ -9,18 +9,28 @@ const GridComponent = ({ elements }) => {
         <motion.div
           className="relative embla__slide__img_div shadow-sm	rounded-xl bg-gray-200 dark:shadow-white "
           key={index}
-          // initial={{ transform: "rotate(0)" }}
-          // whileHover={{ transform: "rotate(5deg)" }}
-          // transition={{ duration: 1 }}
+          initial={{ transform: "scale(1)" }}
+          whileHover={{ transform: "scale(1.05deg)" }}
+          transition={{ duration: 1 }}
         >
           {element.canPlay ? (
             <div className="project">
+              <Image
+                src={element.imageLink}
+                alt={`Project ${index + 1}`}
+                layout="fill"
+                className="embla__slide__img rounded-xl object-cover"
+              />
               <video
-                className="preview-video"
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-300"
                 loop
                 muted
-                autoPlay
                 preload="metadata"
+                onMouseEnter={(e) => e.target.play()}
+                onMouseLeave={(e) => {
+                  e.target.pause();
+                  e.target.currentTime = 0;
+                }}
               >
                 <source src="/orseda.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
