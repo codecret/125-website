@@ -107,12 +107,11 @@ const EmblaCarousel = (props) => {
           className=" absolute top-1/2"
           fill
           objectFit="cover"
-          // objectFit="cover bg-repeat"
           src="/grid.png"
           alt="background image"
         />
       </div>
-      <div className="embla mx-auto py-24">
+      <div className="embla mx-auto my-40" ref={ref}>
         <motion.h1
           className={`section-title-one`}
           initial={{ opacity: 0, scale: 0 }}
@@ -122,7 +121,6 @@ const EmblaCarousel = (props) => {
           transition={{
             duration: 1,
             ease: "easeInOut",
-            // scale: { type: "", visualDuration: 0.4, bounce: 0.5 },
           }}
         >
           Our Projects
@@ -137,7 +135,7 @@ const EmblaCarousel = (props) => {
             ease: "easeInOut",
           }}
         >
-          <div className="shadow-2xl embla__container" ref={ref}>
+          <div className="shadow-2xl embla__container">
             {imageChunks.map((chunk, index) => (
               <div className="shadow-2xl embla__slide" key={index}>
                 <GridComponent elements={chunk} />

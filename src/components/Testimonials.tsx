@@ -3,8 +3,8 @@ import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
 import avatar4 from "@/assets/avatar-4.png";
-import avatar5 from "@/assets/avatar-5.png";
-import avatar6 from "@/assets/avatar-6.png";
+import avatar5 from "@/assets/people/khaled.jpeg";
+import avatar6 from "@/assets/people/ahmad.png";
 import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
@@ -14,55 +14,59 @@ import { motion } from "framer-motion";
 
 const testData = [
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
     imageSrc: avatar1.src,
-    name: "Mohamad Alkhodary",
+    name: "Khaled Nadam",
     username: "MohamadAlkhodary",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+
     imageSrc: avatar2.src,
     name: "John Alkhodary",
     username: "MohamadAlkhodary",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
     imageSrc: avatar3.src,
     name: "Mohamad Alkhodary",
     username: "MohamadAlkhodary",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
     imageSrc: avatar4.src,
     name: "Mohamad Alkhodary",
     username: "MohamadAlkhodary",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "his agency reflects Mohamad's brilliance as a developer and problem solver. I highly recommend working with him for any project you have in mind.",
     imageSrc: avatar5.src,
-    name: "Mohamad Alkhodary",
-    username: "MohamadAlkhodary",
+    name: "Khaled Nadam",
+    username: "Software Engineer",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "What sets Mohamad apart is his ability to combine technical skills with creativity. I’m sure his agency will leave a lasting impression on its clients.",
     imageSrc: avatar6.src,
-    name: "Mohamad Alkhodary",
-    username: "MohamadAlkhodary",
+    name: "Ahmed Alidlibi",
+    username: "Software Engineer",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+
     imageSrc: avatar7.src,
     name: "Mohamad Alkhodary",
     username: "MohamadAlkhodary",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+
     imageSrc: avatar8.src,
     name: "Mohamad Alkhodary",
     username: "MohamadAlkhodary",
   },
   {
-    text: "As a seasoned designer always on the lookout for innovative tools,",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+
     imageSrc: avatar9.src,
     name: "Mohamad Alkhodary",
     username: "MohamadAlkhodary",
