@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import Image from "next/image";
 import { sendEmail } from "@/lib/email";
+import { motion, useInView } from "framer-motion";
+import { slideIn } from "../utils/motion";
 
 const ContactUs = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -48,14 +53,22 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="container p-10 my-20 md:p-16 mx-auto md:flex justify-center relative ">
+    <div
+      ref={ref}
+      className="container md:p-10 my-20 mx-auto md:flex justify-center relative overflow-hidden "
+    >
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover	bg-no-repeat bg-center opacity-5 -z-30"
         style={{
           backgroundImage: "url('/grid.png')",
         }}
       ></div>
-      <div className="relative w-full md:w-[30%] md:mr-20 z-99 text-center md:text-left md:bg-white md:shadow-[0_4px_58px_20px_rgba(82,103,156,0.1)] py-2 rounded-xl overflow-hidden">
+      <motion.div
+        variants={slideIn("left", "tween", 0.2, 1)}
+        className="relative w-full md:w-[30%] md:mr-20 z-99 text-center md:text-left md:bg-white md:shadow-[0_4px_38px_10px_rgba(82,103,156,0.1)] py-2 rounded-xl overflow-hidden"
+        initial="hidden"
+        animate={isInView ? "show" : "hidden"}
+      >
         {/* section-heading */}
         <div className="px-10">
           <h2 className="section-title-one mt-5 text-center md:text-left">
@@ -74,10 +87,13 @@ const ContactUs = () => {
           objectPosition="left"
           className="absolute -translate-x-[50%] dragAndDropImage2 flowBlock -left-[12%]"
         />
-      </div>
-      <form
+      </motion.div>
+      <motion.form
         onSubmit={handleSubmit}
         className="w-full md:w-[40%] flex flex-col gap-6 z-99 mt-10 md:mt-0"
+        variants={slideIn("right", "tween", 0.2, 1)}
+        initial="hidden"
+        animate={isInView ? "show" : "hidden"}
       >
         <div className="flex gap-5">
           <div className="flex flex-col flex-1">
@@ -133,7 +149,7 @@ const ContactUs = () => {
         >
           Send Message
         </button>
-      </form>
+      </motion.form>
     </div>
   );
 };
