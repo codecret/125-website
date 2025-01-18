@@ -90,7 +90,7 @@ const ContactUs = () => {
       </motion.div>
       <motion.form
         onSubmit={handleSubmit}
-        className="w-full md:w-[40%] flex flex-col gap-6 z-99 mt-10 md:mt-0"
+        className="w-full md:w-[40%] flex flex-col gap-6 z-99 mt-10 md:mt-0 px-10 md:p-0"
         variants={slideIn("right", "tween", 0.2, 1)}
         initial="hidden"
         animate={isInView ? "show" : "hidden"}
