@@ -68,11 +68,14 @@ const Pricing = () => {
   const container = useRef(null);
   const ref = useRef(null);
   const isInView = useInView(ref);
-  useEffect(() => {
-    console.log("Element is in view: ", isInView);
-  }, [isInView]);
+
   return (
-    <motion.section className="mt-24" initial={{ y: -70 }} ref={ref}>
+    <motion.section
+      className="mt-24"
+      initial={{ y: -70 }}
+      ref={ref}
+      id="pricing"
+    >
       <div className="container p-5 md:p-16 md:py-0 mx-auto md:pb-16">
         <div className="max-w-[540px] mx-auto">
           <h2 className="section-title-one" ref={container}>

@@ -140,15 +140,12 @@ const ContactUs = () => {
           onChange={handleChange}
           className="bg-gray-50"
         />
-        <button
+        <motion.button
           onClick={handleSubmit}
-          className="p-2 w-full bg-primary rounded-lg mt-5 text-white "
-          style={{
-            boxShadow: "inset 4px 9px 36px rgba(255, 255, 255, 0.8)",
-          }}
+          className="p-2 w-full rounded-lg mt-5 text-white [background-size:200%] text-transparent bg-primary hover:bg-[#343B87] hover:bg-[url('/back.png')] font-medium bg-center transition-all duration-700 ease-in-out"
         >
           Send Message
-        </button>
+        </motion.button>
       </motion.form>
     </div>
   );

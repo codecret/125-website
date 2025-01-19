@@ -8,14 +8,14 @@ export default function Navbar({ toggleTheme, dark }) {
   const [state, setState] = React.useState(false);
 
   const menus = [
-    { title: "Pricing", path: "/pricing" },
-    { title: "Testimonials", path: "/testimonials" },
+    { title: "Pricing", path: "#pricing" },
+    { title: "Testimonials", path: "#testimonials" },
   ];
 
   return (
-    <nav className="w-full border-b md:border-0 z-10">
-      <div className="items-center px-4 max-w-screen-xl mx-8 md:flex md:px-8">
-        <div className="flex items-center justify-between py-3 md:py-5 md:block">
+    <nav className="w-full border-b md:border-0 z-10 flex justify-center items-center ">
+      <div className="flex justify-center items-center px-4 max-w-screen-xl mx-8 md:px-8">
+        <div className="flex items-center justify-center py-3 md:py-5 md:block">
           <Link href="/">
             <h1 className="text-3xl font-bold text-white dark:text-white font-shrinkHand">
               125
@@ -46,7 +46,7 @@ export default function Navbar({ toggleTheme, dark }) {
                 </Link>
               </li>
             ))}
-            <button
+            {/* <button
               type="button"
               data-theme-toggle
               aria-label="Change to light theme"
@@ -54,7 +54,7 @@ export default function Navbar({ toggleTheme, dark }) {
               onClick={toggleTheme}
             >
               {dark ? <Sun color="white" /> : <Moon color="white" />}
-            </button>
+            </button> */}
           </ul>
         </div>
       </div>

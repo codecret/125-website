@@ -24,13 +24,13 @@ export default function Home() {
       xlast: 800,
       imageLink: "/project2.png",
     },
-    { videoLink: "/project2.png", canPlay: false, x: 200, xlast: 600 },
-    { videoLink: "/project3.png", canPlay: false, x: 400, xlast: 400 },
-    { videoLink: "/project4.png", canPlay: false, x: 400, xlast: 200 },
-    { videoLink: "/project5.png", canPlay: false, x: 400, xlast: 0 },
-    { videoLink: "/project6.png", canPlay: false, x: 400, xlast: -200 },
-    { videoLink: "/project6.png", canPlay: false, x: 400, xlast: -400 },
-    { videoLink: "/project6.png", canPlay: false, x: 400, xlast: -600 },
+    { videoLink: "/project3.png", canPlay: false, x: 200, xlast: 600 },
+    { videoLink: "/project6.png", canPlay: false, x: 400, xlast: 400 },
+    { videoLink: "/emi.png", canPlay: false, x: 400, xlast: 200 },
+    { videoLink: "/project1.png", canPlay: false, x: 400, xlast: 0 },
+    // { videoLink: "/project6.png", canPlay: false, x: 400, xlast: -200 },
+    // { videoLink: "/project6.png", canPlay: false, x: 400, xlast: -400 },
+    // { videoLink: "/project6.png", canPlay: false, x: 400, xlast: -600 },
   ];
   const targetRef = useRef<HTMLDivElement>(null);
 

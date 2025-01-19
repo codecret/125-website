@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Arima, Roboto, Shrikhand } from "next/font/google";
+import localFont from "next/font/local";
 
-const mainFont = Arima({
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--arima",
+// const mainFont = Arima({
+//   weight: ["100", "200", "300", "400", "500", "600", "700"],
+//   subsets: ["latin"],
+//   display: "swap",
+//   variable: "--arima",
+// });
+
+const mainFont = localFont({
+  src: "./fonts/Milligram-Macro-Bold-trial.ttf",
+  variable: "--main",
 });
 
 const roboto = Roboto({

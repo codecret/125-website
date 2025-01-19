@@ -123,7 +123,7 @@ const TestimonialCol = (props: {
 );
 const Testimonials = () => {
   return (
-    <section className="bg-white ">
+    <section className="bg-white" id="testimonials">
       <div className="container p-10 md:p-16 mx-auto">
         <div className="section-heading">
           {/* <div className="flex justify-center">

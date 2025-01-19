@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButtons";
 import GridComponent from "./GridComponent";
 import Image from "next/image";
-import { motion, useInView, useScroll } from "motion/react";
+import { motion, useInView } from "motion/react";
 
 const TWEEN_FACTOR_BASE = 0.84;
 
@@ -111,7 +111,7 @@ const EmblaCarousel = (props) => {
           alt="background image"
         />
       </div>
-      <div className="embla mx-auto my-40" ref={ref}>
+      <div className="embla mx-auto my-14 md:my-40" ref={ref}>
         <motion.h1
           className={`section-title-one`}
           initial={{ opacity: 0, scale: 0 }}
