@@ -1,7 +1,7 @@
 "use client";
 import avatar1 from "@/assets/people/khaled.jpeg";
 import avatar2 from "@/assets/people/ahmad.png";
-import avatar3 from "@/assets/avatar-3.png";
+import avatar3 from "@/assets/people/mayyar.jpg";
 import avatar4 from "@/assets/avatar-4.png";
 import avatar5 from "@/assets/avatar-7.png";
 import avatar6 from "@/assets/avatar-7.png";
@@ -14,22 +14,22 @@ import { motion } from "framer-motion";
 
 const testData = [
   {
-    text: "his agency reflects Mohamad's brilliance as a developer and problem solver. I highly recommend working with him for any project you have in mind.",
+    text: "I highly recommend working with them for any project you have in mind.",
     imageSrc: avatar1.src,
     name: "Khaled Nadam",
     username: "Software Engineer",
   },
   {
-    text: "What sets Mohamad apart is his ability to combine technical skills with creativity. I’m sure his agency will leave a lasting impression on its clients.",
+    text: "What sets 125 apart is his ability to combine technical skills with creativity. I’m sure they will leave a lasting impression on its clients.",
     imageSrc: avatar2.src,
     name: "Ahmad Alidlibi",
     username: "Software Engineer",
   },
   {
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
+    text: "Mohamad’s ability to turn ideas into beautifully designed and fully functional websites is unmatched.",
     imageSrc: avatar3.src,
-    name: "Name",
-    username: "role",
+    name: "Mayyar",
+    username: "CEO @Graphic",
   },
   {
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
