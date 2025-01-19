@@ -55,7 +55,8 @@ const ContactUs = () => {
   return (
     <div
       ref={ref}
-      className="container md:p-10 my-20 mx-auto md:flex justify-center relative overflow-hidden "
+      className="container md:p-10 my-20 mx-auto md:flex justify-center relative overflow-hidden"
+      id="contact"
     >
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover	bg-no-repeat bg-center opacity-5 -z-30"

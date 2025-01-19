@@ -3,7 +3,7 @@ const pricingData = [
   {
     title: "Basic Plan",
     monthlyPrice: 200,
-    buttonText: "Get Started for Free",
+    buttonText: "Get Started now",
     popular: false,
     inverse: false,
     features: [
@@ -63,12 +63,22 @@ import { twMerge } from "tailwind-merge";
 import { CheckIcon } from "lucide-react";
 import { useInView, motion } from "motion/react";
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 const Pricing = () => {
+  const router = useRouter();
   const container = useRef(null);
   const ref = useRef(null);
   const isInView = useInView(ref);
-
+  const navigateToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
   return (
     <motion.section
       className="mt-24"
@@ -162,6 +172,7 @@ const Pricing = () => {
                     "btn btn-primary w-full mt-[30px]",
                     inverse === true && "bg-white text-black"
                   )}
+                  onClick={navigateToContact}
                 >
                   {buttonText}
                 </button>
