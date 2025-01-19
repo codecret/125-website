@@ -131,8 +131,8 @@ const Testimonials = () => {
           </div> */}
           <h2 className="section-title-one mt-5">Testimonials</h2>
           <p className="section-description">
-            From intutive design to powerful features, our apps has become an
-            essential tools for users around the world
+            Our work goes beyond business. We’re proud to build lasting
+            relationships with both friends and clients
           </p>
         </div>
         <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] mt-10 max-h-[738px] overflow-hidden">

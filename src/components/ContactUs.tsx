@@ -75,8 +75,7 @@ const ContactUs = () => {
             Contact Us
           </h2>
           <p className="section-description text-center md:text-left font-normal">
-            From intutive design to powerful features, our apps has become an
-            essential tools for users around the world
+            Reach out to us today and let’s start building.
           </p>
         </div>
         <Image

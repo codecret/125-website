@@ -82,8 +82,9 @@ const Pricing = () => {
             Pricing
           </h2>
           <p className="section-description mt-5">
-            Free forever. Upgrade for unlimited tasks, better security, and
-            exclusive features.
+            Choose the plan that fits your business needs and unlock powerful
+            features, security, and support. Our plans are designed provide more
+            value as you scale.
           </p>
         </div>
         <div className="flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center">
@@ -129,7 +130,6 @@ const Pricing = () => {
                   {popular === true && (
                     <div className="inline-flex text-sm px-4 py-1.5 rounded-xl border border-white/20 bg-white">
                       <motion.span
-                        // #0000EB,#FFFFFF,#0000EB,#FFFFFF,#0000EB
                         className="bg-[linear-gradient(to_right,#FFFFFF,#0000EB,#FFFFFF,#0000EB,#FFFFFF)] [background-size:200%] text-transparent bg-clip-text font-medium"
                         animate={{ backgroundPositionX: "-100%" }}
                         transition={{
