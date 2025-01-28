@@ -5,6 +5,7 @@ import Image from "next/image";
 import { sendEmail } from "@/lib/email";
 import { motion, useInView } from "framer-motion";
 import { slideIn } from "../utils/motion";
+import { data } from "@/lib/data";
 
 const ContactUs = () => {
   const ref = useRef(null);
@@ -42,7 +43,7 @@ const ContactUs = () => {
 
     try {
       await sendEmail({
-        to: "hello@codecret.com",
+        to: data.socialMedia.email,
         subject: "Contact Us Message",
         body,
       });
@@ -142,7 +143,8 @@ const ContactUs = () => {
         />
         <motion.button
           onClick={handleSubmit}
-          className="p-2 w-full rounded-lg mt-5 text-white [background-size:200%] text-transparent bg-primary hover:bg-[#343B87] hover:bg-[url('/back.png')] font-medium bg-center transition-all duration-700 ease-in-out"
+          className="cursor-pointer p-2 w-full rounded-lg mt-5 text-white [background-size:200%] bg-primary hover:bg-[#343B87] hover:bg-[url('/back.png')] font-medium bg-center transition-all duration-700 ease-in-out"
+          style={{ cursor: "pointer" }}
         >
           Send Message
         </motion.button>

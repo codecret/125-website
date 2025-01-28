@@ -102,7 +102,7 @@ const EmblaCarousel = (props) => {
 
   return (
     <div className="relative md:mt-12">
-      <div className="absolute w-[1200px] h-[700px] opacity-10 top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
+      <div className="absolute w-[700px] h-[300px] opacity-10 top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
         <Image
           className=" absolute top-1/2"
           fill

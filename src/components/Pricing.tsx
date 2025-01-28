@@ -1,69 +1,11 @@
 "use client";
-const pricingData = [
-  {
-    title: "Basic Plan",
-    monthlyPrice: 200,
-    buttonText: "Get Started now",
-    popular: false,
-    inverse: false,
-    features: [
-      "1 Custom Website Design",
-      "Up to 5 pages",
-      "Basic SEO optimization",
-      "Mobile responsiveness",
-      "Cross-Browser Support",
-      "Email support",
-      "1-year free domain",
-      "Lifetime free SSL certificate",
-    ],
-    x: 400,
-    xlast: 0,
-  },
-  {
-    title: "Business Plan",
-    monthlyPrice: 500,
-    buttonText: "Get Started Now",
-    popular: true,
-    inverse: true,
-    features: [
-      "Includes Basic Plan",
-      "Custom Website Design",
-      "Advanced SEO",
-      "Performance Optimization",
-      "Custom Code Functionality",
-      "Advanced Analytics Integration",
-      "Priority Email Support",
-      "Content Management System (CMS)",
-      "Team Collaboration Features",
-    ],
-    x: -200,
-    xlast: 0,
-  },
-  {
-    title: "Stores Plan",
-    monthlyPrice: 400,
-    buttonText: "Get Started Now",
-    popular: false,
-    inverse: false,
-    features: [
-      "Includes Basic Plan",
-      "Custom Website Design",
-      "Premium SEO",
-      "Inventory Management",
-      "E-commerce Setup & Integration",
-      "Advanced Analytics & Reporting",
-      "Dedicated Project Manager Support",
-      "Priority Email Support",
-    ],
-    x: -400,
-    xlast: 0,
-  },
-];
+
 import { twMerge } from "tailwind-merge";
 import { CheckIcon } from "lucide-react";
 import { useInView, motion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { pricingData } from "@/lib/data";
 
 const Pricing = () => {
   const router = useRouter();

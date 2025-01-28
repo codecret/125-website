@@ -3,13 +3,14 @@ import React from "react";
 import FooterLogo from "./FooterLogo";
 import JumpingMan from "./JumpingMan";
 import { Icon } from "@iconify/react";
-
+import { data } from "@/lib/data";
 interface FooterContent {
   text: string;
   href: string;
   target: string;
 }
 const Footer1 = ({ style }: { style?: object }) => {
+  const socialMedia = data.socialMedia;
   return (
     <footer
       className="sticky bottom-0 flex  w-full flex-col items-end 
@@ -20,13 +21,19 @@ const Footer1 = ({ style }: { style?: object }) => {
       }}
     >
       <div className="social-media-links mx-auto flex justify-center gap-5 my-10">
-        <Icon icon="mdi:instagram" color="white" fontSize={30} />
-        <Icon
-          icon="hugeicons:new-twitter-rectangle"
-          color="white"
-          fontSize={30}
-        />
-        <Icon icon="ic:baseline-whatsapp" color="white" fontSize={30} />
+        <Link href={`https://www.instagram.com/${socialMedia.instagram}`}>
+          <Icon icon="mdi:instagram" color="white" fontSize={30} />
+        </Link>
+        <Link href={`https://x.com/${socialMedia.x}`}>
+          <Icon
+            icon="hugeicons:new-twitter-rectangle"
+            color="white"
+            fontSize={30}
+          />
+        </Link>
+        <Link href={`https://wa.me/${socialMedia.whatsapp}`}>
+          <Icon icon="ic:baseline-whatsapp" color="white" fontSize={30} />
+        </Link>
       </div>
       <section
         className="container mt-auto mx-auto flex flex-col items-center justify-between 

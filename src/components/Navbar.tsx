@@ -4,14 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { Menu, Moon, Sun } from "lucide-react";
 import Logo from "./Logo";
+import { menus } from "@/lib/data";
 
 export default function Navbar({ toggleTheme, dark }) {
   const [state, setState] = React.useState(false);
-
-  const menus = [
-    { title: "Pricing", path: "#pricing" },
-    { title: "Testimonials", path: "#testimonials" },
-  ];
 
   return (
     <nav className="w-full border-b md:border-0 z-10 flex justify-center items-center ">
@@ -19,9 +15,6 @@ export default function Navbar({ toggleTheme, dark }) {
         <div className="flex items-center justify-center py-3 md:py-5 md:block">
           <Link href="/">
             <Logo />
-            {/* <h1 className="text-3xl font-bold text-white dark:text-white font-shrinkHand">
-              125
-            </h1> */}
           </Link>
           {/* <div className="md:hidden">
             <button
@@ -38,9 +31,9 @@ export default function Navbar({ toggleTheme, dark }) {
           }`}
         >
           <ul className="ml-5 items-center space-y-8 md:flex md:space-x-6 md:space-y-0 mr-6">
-            {menus.map((item, idx) => (
+            {menus.map((item, id) => (
               <li
-                key={idx}
+                key={id}
                 className="text-white hover:text-gray-400 dark:hover:text-slate-200 font-main"
               >
                 <Link href={item.path} className="font-roboto">
