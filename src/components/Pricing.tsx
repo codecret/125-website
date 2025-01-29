@@ -4,11 +4,9 @@ import { twMerge } from "tailwind-merge";
 import { CheckIcon } from "lucide-react";
 import { useInView, motion } from "motion/react";
 import { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
 import { pricingData } from "@/lib/data";
 
 const Pricing = () => {
-  const router = useRouter();
   const container = useRef(null);
   const ref = useRef(null);
   const isInView = useInView(ref);
