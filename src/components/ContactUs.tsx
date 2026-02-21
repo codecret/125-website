@@ -3,7 +3,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import Image from "next/image";
 import { sendEmail } from "@/lib/email";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { slideIn } from "../utils/motion";
 import { data } from "@/lib/data";
 

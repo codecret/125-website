@@ -20,7 +20,7 @@ const GridComponent = ({ elements }) => {
               <Image
                 src={element.imageLink}
                 alt={`Project ${index + 1}`}
-                layout="fill"
+                fill
                 className="embla__slide__img rounded-xl object-cover"
               />
               <video

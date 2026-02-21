@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { inView } from "motion";
-import { useInView } from "framer-motion";
+import { useInView } from "motion/react";
 import Image from "next/image";
 
 const EmblaCarousel1 = ({ slides }) => {

@@ -13,9 +13,9 @@ const data = {
     logo: "/logo.svg",
   },
   socialMedia: {
-    instagram: "codecret1",
+    instagram: "codecret",
     x: "codecret",
-    whatsapp: "05313421774",
+    whatsapp: "0561231217",
     email: "hello@codecret.com",
   },
 };

@@ -1,4 +1,6 @@
-export const textVariant = (delay) => {
+import type { Variants, AnimationGeneratorType } from "motion/react";
+
+export const textVariant = (delay: number): Variants => {
   return {
     hidden: {
       y: -50,
@@ -16,7 +18,7 @@ export const textVariant = (delay) => {
   };
 };
 
-export const fadeIn = (direction, type, delay, duration) => {
+export const fadeIn = (direction: string, type: AnimationGeneratorType, delay: number, duration: number): Variants => {
   return {
     hidden: {
       x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
@@ -31,13 +33,13 @@ export const fadeIn = (direction, type, delay, duration) => {
         type: type,
         delay: delay,
         duration: duration,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
 };
 
-export const zoomIn = (delay, duration) => {
+export const zoomIn = (delay: number, duration: number): Variants => {
   return {
     hidden: {
       scale: 0,
@@ -50,33 +52,34 @@ export const zoomIn = (delay, duration) => {
         type: "tween",
         delay: delay,
         duration: duration,
-        ease: "easeOut",
-      },
-    },
-  };
-};
-export const slideIn = (direction, type, delay, duration) => {
-  return {
-    hidden: {
-      x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
-      y: direction === "up" ? "-100%" : direction === "down" ? "100%" : 0,
-      opacity: 0, // Optional: for smoother transitions
-    },
-    show: {
-      x: 0,
-      y: 0,
-      opacity: 1, // Ensure the element becomes visible
-      transition: {
-        type: type,
-        delay: delay,
-        duration: duration,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   };
 };
 
-export const staggerContainer = (staggerChildren, delayChildren) => {
+export const slideIn = (direction: string, type: AnimationGeneratorType, delay: number, duration: number): Variants => {
+  return {
+    hidden: {
+      x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
+      y: direction === "up" ? "-100%" : direction === "down" ? "100%" : 0,
+      opacity: 0,
+    },
+    show: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: type,
+        delay: delay,
+        duration: duration,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+};
+
+export const staggerContainer = (staggerChildren: number, delayChildren?: number): Variants => {
   return {
     hidden: {},
     show: {
