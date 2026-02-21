@@ -17,8 +17,8 @@ html {
 }
 
 body.dark {
-  color: rgb(26, 26, 26);
-  background: rgb(26, 26, 26);
+  color: rgb(245, 245, 245);
+  background: rgb(10, 10, 20);
 }
 @layer utilities {
   .text-balance {
@@ -71,8 +71,8 @@ body.dark {
     --card-foreground: 0 0% 98%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: #3139fb;
+    --primary-foreground: 0 0% 98%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
@@ -124,10 +124,10 @@ body.dark {
 
 @layer components {
   .btn {
-    @apply bg-black text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight;
+    @apply bg-black text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight dark:bg-white dark:text-black;
   }
   .btn-primary {
-    @apply bg-black text-white;
+    @apply bg-black text-white dark:bg-white dark:text-black;
   }
 
   .btn-text {
@@ -149,13 +149,13 @@ body.dark {
     @apply text-center text-3xl md:text-[34px] md:leading-[60px] mb-5 bg-gradient-to-b from-[#3138fb9e] to-[#1119ef] text-transparent bg-clip-text dark:text-white font-main font-bold;
   }
   .section-description {
-    @apply text-center text-base sm:text-[22px] leading-[26px] sm:leading-[30px] tracking-tight text-[#050505] opacity-40 font-roboto;
+    @apply text-center text-base sm:text-[22px] leading-[26px] sm:leading-[30px] tracking-tight text-[#050505] opacity-40 font-roboto dark:text-gray-400 dark:opacity-100;
   }
   .section-heading {
     @apply max-w-[540px] mx-auto;
   }
   .card {
-    @apply p-6 sm:p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
+    @apply p-6 sm:p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full dark:border-white/10 dark:shadow-none dark:bg-white/5;
   }
 }
 

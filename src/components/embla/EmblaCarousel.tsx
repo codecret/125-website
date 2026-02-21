@@ -113,11 +113,11 @@ const EmblaCarousel = (props: EmblaCarouselProps) => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-center mb-12 md:mb-16 px-4"
       >
-        <p className="text-sm font-medium tracking-widest uppercase text-primary/70 mb-3">
+        <p className="text-sm font-medium tracking-widest uppercase text-primary/70 dark:text-blue-400/80 mb-3">
           Portfolio
         </p>
         <h2 className="section-title-one mb-2!">Our Projects</h2>
-        <p className="text-gray-500 text-sm md:text-base max-w-md mx-auto">
+        <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-md mx-auto">
           A selection of our recent work across various industries
         </p>
       </motion.div>
@@ -203,7 +203,7 @@ const EmblaCarousel = (props: EmblaCarouselProps) => {
               className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                 index === selectedIndex
                   ? "bg-primary w-8"
-                  : "bg-gray-300 hover:bg-gray-400"
+                  : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
               }`}
             />
           ))}

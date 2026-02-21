@@ -33,7 +33,7 @@ const TestimonialCol = (props: {
           <React.Fragment key={index}>
             {props.testData.map(({ text, imageSrc, name, username }, index) => (
               <div className="card mx-auto" key={index}>
-                <div>{text}</div>
+                <div className="dark:text-gray-300">{text}</div>
                 <div className="flex items-center gap-2 mt-5">
                   <Image
                     src={imageSrc}
@@ -43,10 +43,10 @@ const TestimonialCol = (props: {
                     className="h-10 w-10 rounded-full"
                   />
                   <div className="flex flex-col">
-                    <div className="font-medium tracking-tight leading-5">
+                    <div className="font-medium tracking-tight leading-5 dark:text-white">
                       {name}
                     </div>
-                    <div className="leading-5 tracking-tight">{username}</div>
+                    <div className="leading-5 tracking-tight dark:text-gray-400">{username}</div>
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@ const TestimonialCol = (props: {
 );
 const Testimonials = () => {
   return (
-    <section className="bg-white" id="testimonials">
+    <section className="bg-white dark:bg-transparent" id="testimonials">
       <div className="container p-5 sm:p-10 md:p-16 mx-auto">
         <div className="section-heading">
           {/* <div className="flex justify-center">

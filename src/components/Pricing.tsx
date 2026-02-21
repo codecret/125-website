@@ -56,7 +56,7 @@ const Pricing = () => {
                 key={index}
                 className={twMerge(
                   "card",
-                  inverse === true && "border-white bg-primary text-white/60"
+                  inverse === true && "border-white bg-primary text-white/60 dark:border-white/20"
                 )}
                 style={{
                   backgroundImage: inverse ? "url('/gridwhite.png')" : "none",
@@ -71,7 +71,7 @@ const Pricing = () => {
                   {/* title */}
                   <h3
                     className={twMerge(
-                      "text-lg font-bold text-black/50",
+                      "text-lg font-bold text-black/50 dark:text-white/70",
                       inverse === true && "text-white"
                     )}
                   >
@@ -97,20 +97,20 @@ const Pricing = () => {
                 <div className="flex items-baseline gap-1 mt-[30px]">
                   <span
                     className={twMerge(
-                      "tracking-tight font-bold text-black/50",
+                      "tracking-tight font-bold text-black/50 dark:text-white/70",
                       inverse === true && "text-white"
                     )}
                   >
                     From
                   </span>
-                  <span className="text-4xl font-bold tracking-tighter leading-none">
+                  <span className="text-4xl font-bold tracking-tighter leading-none dark:text-white">
                     ${monthlyPrice}
                   </span>
                 </div>
                 <button
                   className={twMerge(
                     "btn btn-primary w-full mt-[30px]",
-                    inverse === true && "bg-white text-black"
+                    inverse === true && "bg-white text-black dark:bg-white dark:text-black"
                   )}
                   onClick={navigateToContact}
                 >
@@ -122,7 +122,7 @@ const Pricing = () => {
                       <li
                         key={index}
                         className={twMerge(
-                          "text-sm flex items-center gap-4 font-medium",
+                          "text-sm flex items-center gap-4 font-medium dark:text-gray-300",
                           inverse === true && "text-white"
                         )}
                       >

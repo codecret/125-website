@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div>
       <Navbar toggleTheme={toggleTheme} dark={dark} />
-      <div className="overflow-hidden z-30 relative bg-white" ref={targetRef}>
+      <div className="overflow-hidden z-30 relative bg-white dark:bg-[#0a0a14] transition-colors duration-300" ref={targetRef}>
         <Hero toggleTheme={toggleTheme} dark={dark} refVar={targetRef} />
         {/* <EmblaCarousel1 slides={imageSources} options={OPTIONS} /> */}
         <EmblaCarousel slides={projects} options={OPTIONS} />

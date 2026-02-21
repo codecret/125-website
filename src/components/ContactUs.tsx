@@ -67,7 +67,7 @@ const ContactUs = () => {
       ></div>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className="relative w-full md:w-[30%] md:mr-20 z-99 text-center md:text-left md:bg-white md:shadow-[0_4px_38px_10px_rgba(82,103,156,0.1)] py-2 rounded-xl overflow-hidden"
+        className="relative w-full md:w-[30%] md:mr-20 z-99 text-center md:text-left md:bg-white dark:md:bg-white/5 md:shadow-[0_4px_38px_10px_rgba(82,103,156,0.1)] dark:md:shadow-none dark:md:border dark:md:border-white/10 py-2 rounded-xl overflow-hidden"
         initial="hidden"
         animate={isInView ? "show" : "hidden"}
       >
@@ -98,48 +98,48 @@ const ContactUs = () => {
       >
         <div className="flex gap-5">
           <div className="flex flex-col flex-1">
-            <label htmlFor="firstName">First name</label>
+            <label htmlFor="firstName" className="dark:text-gray-300">First name</label>
             <Input
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
               type="text"
-              className="bg-gray-50"
+              className="bg-gray-50 dark:bg-white/5 dark:border-white/10 dark:text-white"
             />
           </div>
           <div className="flex flex-col flex-1">
-            <label htmlFor="lastName">Last name</label>
+            <label htmlFor="lastName" className="dark:text-gray-300">Last name</label>
             <Input
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
               type="text"
-              className="bg-gray-50"
+              className="bg-gray-50 dark:bg-white/5 dark:border-white/10 dark:text-white"
             />
           </div>
         </div>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className="dark:text-gray-300">Email</label>
         <Input
           name="email"
           value={formData.email}
           onChange={handleChange}
           type="email"
-          className="bg-gray-50"
+          className="bg-gray-50 dark:bg-white/5 dark:border-white/10 dark:text-white"
         />
-        <label htmlFor="phone">Phone number</label>
+        <label htmlFor="phone" className="dark:text-gray-300">Phone number</label>
         <Input
           name="phone"
           value={formData.phone}
           onChange={handleChange}
           type="number"
-          className="bg-gray-50"
+          className="bg-gray-50 dark:bg-white/5 dark:border-white/10 dark:text-white"
         />
-        <label htmlFor="message">Message</label>
+        <label htmlFor="message" className="dark:text-gray-300">Message</label>
         <Textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
-          className="bg-gray-50"
+          className="bg-gray-50 dark:bg-white/5 dark:border-white/10 dark:text-white"
         />
         <motion.button
           onClick={handleSubmit}

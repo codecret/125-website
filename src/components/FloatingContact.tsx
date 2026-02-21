@@ -24,7 +24,7 @@ export default function FloatingContact() {
           href={`tel:${PHONE_NUMBER}`}
           className="group flex items-center gap-2"
         >
-          <span className="bg-gray-900 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
+          <span className="bg-gray-900 dark:bg-gray-700 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
             Call Us
           </span>
           <div className="w-12 h-12 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center shadow-lg transition-colors">
@@ -51,7 +51,7 @@ export default function FloatingContact() {
           rel="noopener noreferrer"
           className="group flex items-center gap-2"
         >
-          <span className="bg-gray-900 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
+          <span className="bg-gray-900 dark:bg-gray-700 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
             WhatsApp
           </span>
           <div className="w-12 h-12 bg-[#25D366] hover:bg-[#1fb855] rounded-full flex items-center justify-center shadow-lg transition-colors">
