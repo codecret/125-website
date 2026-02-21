@@ -145,15 +145,44 @@ const testData = [
 ];
 const projects = [
   {
+    name: "Orseda",
+    category: "E-Commerce",
+    description: "Modern online store with seamless checkout experience",
+    imageLink: "/project2.png",
     videoLink: "/orseda.mp4",
     canPlay: true,
-    x: 400,
-    xlast: 800,
-    imageLink: "/project2.png",
   },
-  { videoLink: "/project3.png", canPlay: false, x: 200, xlast: 600 },
-  { videoLink: "/project6.png", canPlay: false, x: 400, xlast: 400 },
-  { videoLink: "/emi.png", canPlay: false, x: 400, xlast: 200 },
-  { videoLink: "/project1.png", canPlay: false, x: 400, xlast: 0 },
+  {
+    name: "Brand Identity",
+    category: "Web Design",
+    description: "Complete brand redesign and digital presence",
+    imageLink: "/project3.png",
+    videoLink: "/project3.png",
+    canPlay: false,
+  },
+  {
+    name: "Dashboard Pro",
+    category: "Web App",
+    description: "Analytics dashboard with real-time data visualization",
+    imageLink: "/project6.png",
+    videoLink: "/project6.png",
+    canPlay: false,
+  },
+  {
+    name: "Emi Studio",
+    category: "Portfolio",
+    description: "Creative portfolio showcasing visual artistry",
+    imageLink: "/emi.png",
+    videoLink: "/emi.png",
+    canPlay: false,
+  },
+  {
+    name: "Tech Platform",
+    category: "SaaS",
+    description: "Full-stack platform with modern architecture",
+    imageLink: "/project1.png",
+    videoLink: "/project1.png",
+    canPlay: false,
+  },
 ];
 export { data, menus, pricingData, testData, projects };
