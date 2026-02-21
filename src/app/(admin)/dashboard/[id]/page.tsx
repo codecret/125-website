@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +13,9 @@ import { Label } from "@/components/ui/label";
 import {
   STATUS_VALUES,
   STATUS_LABELS,
+  PROJECT_TYPES,
+  BUDGET_RANGES,
+  TIMELINES,
   type ApplicationStatus,
 } from "@/lib/validators";
 import Link from "next/link";
@@ -44,8 +47,27 @@ export default function ApplicationDetailPage() {
   const [notesInitialized, setNotesInitialized] = useState(false);
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [budgetRange, setBudgetRange] = useState("");
+  const [timeline, setTimeline] = useState("");
+  const [description, setDescription] = useState("");
+  const [detailsInitialized, setDetailsInitialized] = useState(false);
 
   const utils = trpc.useUtils();
+
+  useEffect(() => {
+    if (app && !detailsInitialized) {
+      setFullName(app.fullName);
+      setEmail(app.email);
+      setProjectType(app.projectType);
+      setBudgetRange(app.budgetRange);
+      setTimeline(app.timeline);
+      setDescription(app.description);
+      setDetailsInitialized(true);
+    }
+  }, [app, detailsInitialized]);
 
   const updateStatusMutation = trpc.admin.updateStatus.useMutation({
     onSuccess: () => {
@@ -60,6 +82,13 @@ export default function ApplicationDetailPage() {
   const updateNotesMutation = trpc.admin.updateNotes.useMutation({
     onSuccess: () => {
       refetch();
+    },
+  });
+
+  const updateApplicationMutation = trpc.admin.updateApplication.useMutation({
+    onSuccess: () => {
+      refetch();
+      utils.admin.list.invalidate();
     },
   });
 

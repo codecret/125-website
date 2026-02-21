@@ -65,6 +65,10 @@ export function ApplicationEditDialog({
   }, [app?.adminNotes, notesInitialized]);
 
   useEffect(() => {
+    setDetailsInitialized(false);
+  }, [appId]);
+
+  useEffect(() => {
     if (app && !detailsInitialized) {
       setFullName(app.fullName);
       setEmail(app.email);
@@ -147,36 +151,117 @@ export function ApplicationEditDialog({
       )}
       {!isLoading && app && (
         <div className="space-y-4">
-          {/* Details */}
+          {/* Applicant details (editable) */}
           <Card>
             <CardHeader className="py-3">
-              <CardTitle className="text-sm">Details</CardTitle>
+              <CardTitle className="text-sm">Applicant details</CardTitle>
             </CardHeader>
-            <CardContent className="py-0 pb-3 text-sm">
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <p className="text-gray-500">Name</p>
-                  <p className="font-medium">{app.fullName}</p>
+            <CardContent className="space-y-3 py-0 pb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="space-y-1">
+                  <Label className="text-xs">Full name</Label>
+                  <Input
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="text-sm"
+                  />
                 </div>
-                <div>
-                  <p className="text-gray-500">Email</p>
-                  <p className="font-medium">{app.email}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Project</p>
-                  <p className="font-medium">{app.projectType}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Budget</p>
-                  <p className="font-medium">{app.budgetRange}</p>
+                <div className="space-y-1">
+                  <Label className="text-xs">Email</Label>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="text-sm"
+                  />
                 </div>
               </div>
-              <div className="mt-2">
-                <p className="text-gray-500">Description</p>
-                <p className="mt-0.5 text-sm whitespace-pre-wrap bg-gray-50 p-2 rounded">
-                  {app.description}
+              <div className="space-y-1">
+                <Label className="text-xs">Project type</Label>
+                <Select
+                  value={projectType}
+                  onChange={(e) => setProjectType(e.target.value)}
+                >
+                  <option value="">Select...</option>
+                  {PROJECT_TYPES.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="space-y-1">
+                  <Label className="text-xs">Budget</Label>
+                  <Select
+                    value={budgetRange}
+                    onChange={(e) => setBudgetRange(e.target.value)}
+                  >
+                    <option value="">Select...</option>
+                    {BUDGET_RANGES.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+                <div className="space-y-1">
+                  <Label className="text-xs">Timeline</Label>
+                  <Select
+                    value={timeline}
+                    onChange={(e) => setTimeline(e.target.value)}
+                  >
+                    <option value="">Select...</option>
+                    {TIMELINES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <Label className="text-xs">Description</Label>
+                <Textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="min-h-[80px] text-sm"
+                />
+              </div>
+              <Button
+                size="sm"
+                className="w-full"
+                disabled={
+                  updateApplicationMutation.isPending ||
+                  !fullName.trim() ||
+                  !email.trim() ||
+                  !projectType ||
+                  !budgetRange ||
+                  !timeline ||
+                  !description.trim()
+                }
+                onClick={() => {
+                  updateApplicationMutation.mutate({
+                    id: app.id,
+                    fullName: fullName.trim(),
+                    email: email.trim(),
+                    projectType,
+                    budgetRange,
+                    timeline,
+                    description: description.trim(),
+                  });
+                }}
+              >
+                {updateApplicationMutation.isPending ? "Saving..." : "Save details"}
+              </Button>
+              {updateApplicationMutation.isSuccess && (
+                <p className="text-xs text-green-600">Details saved.</p>
+              )}
+              {updateApplicationMutation.error && (
+                <p className="text-xs text-red-500">
+                  {updateApplicationMutation.error.message || "Failed to save."}
                 </p>
-              </div>
+              )}
             </CardContent>
           </Card>
 
