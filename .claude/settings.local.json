@@ -4,7 +4,10 @@
       "Bash(npm update:*)",
       "Bash(npm install:*)",
       "Bash(npm ls:*)",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(ls:*)",
+      "Bash(wc -l:*)",
+      "WebFetch(domain:www.better-auth.com)"
     ]
   }
 }
