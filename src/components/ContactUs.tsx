@@ -2,11 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import Image from "next/image";
-import { sendEmail } from "@/lib/email";
 import { motion, useInView } from "motion/react";
 import { slideIn } from "../utils/motion";
-import { data } from "@/lib/data";
-
 const ContactUs = () => {
   const ref = useRef(null);
   const isInView = useInView(ref);
@@ -33,20 +30,22 @@ const ContactUs = () => {
       return;
     }
 
-    const body = `
-      First Name: ${firstName}
-      Last Name: ${lastName}
-      Email: ${email}
-      Phone: ${phone}
-      Message: ${message}
-    `;
-
     try {
-      await sendEmail({
-        to: data.socialMedia.email,
-        subject: "Contact Us Message",
-        body,
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          message,
+        }),
       });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Failed to send");
+      }
       alert("Message sent successfully!");
     } catch (error) {
       alert("Error sending message, please try again.");
