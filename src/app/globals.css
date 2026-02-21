@@ -110,7 +110,8 @@ body.dark {
 }
 
 .mySwiper {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 27px;
   border: 1px solid #999999;
   transform: translateY(-50%);
@@ -148,13 +149,13 @@ body.dark {
     @apply text-center text-3xl md:text-[34px] md:leading-[60px] mb-5 bg-gradient-to-b from-[#3138fb9e] to-[#1119ef] text-transparent bg-clip-text dark:text-white font-main font-bold;
   }
   .section-description {
-    @apply text-center text-[22px] leading-[30px] tracking-tight text-[#050505] opacity-40 font-roboto;
+    @apply text-center text-base sm:text-[22px] leading-[26px] sm:leading-[30px] tracking-tight text-[#050505] opacity-40 font-roboto;
   }
   .section-heading {
     @apply max-w-[540px] mx-auto;
   }
   .card {
-    @apply p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
+    @apply p-6 sm:p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
   }
 }
 
@@ -214,9 +215,14 @@ body.dark {
 .embla__slide__img_div {
   display: block;
   width: 100%;
-  height: 250px;
+  height: 180px;
   /* border: 1px solid rgba(0, 0, 255, 0.516); */
   /* box-shadow: -2frlorgba(0, 49, 255, 0.13); */
+}
+@media (min-width: 640px) {
+  .embla__slide__img_div {
+    height: 250px;
+  }
 }
 .embla__slide__img {
   object-fit: cover;
@@ -335,7 +341,7 @@ body.dark {
   transform-origin: center center;
 }
 .figureshape {
-  font-size: 7em;
+  font-size: 3em;
   font-weight: 700;
   position: absolute;
   text-shadow:
@@ -343,6 +349,11 @@ body.dark {
     -1px -1px 5px rgba(0, 0, 0, 0.4),
     0px 0px 25px rgba(246, 246, 246, 0.06);
   color: #ffffff;
+}
+@media (min-width: 768px) {
+  .figureshape {
+    font-size: 7em;
+  }
 }
 .figureshape:first-child {
   top: 10%;
@@ -464,13 +475,13 @@ body.dark {
 }
 
 .footer-heading {
-  @apply text-[40px] font-semibold
-    leading-[48px] tracking-[-0.04em] lg:text-[68px] lg:leading-[62px] xl:text-[82px] xl:leading-[78px];
+  @apply text-[28px] font-semibold
+    leading-[36px] tracking-[-0.04em] sm:text-[36px] sm:leading-[44px] lg:text-[68px] lg:leading-[62px] xl:text-[82px] xl:leading-[78px];
 }
 
 .footer-heading-large {
-  @apply text-[40px] font-semibold
-  leading-[48px] tracking-[-0.04em] lg:text-[50px] lg:leading-[62px] xl:text-[52px] xl:leading-[58px];
+  @apply text-[28px] font-semibold
+  leading-[36px] tracking-[-0.04em] sm:text-[36px] sm:leading-[44px] lg:text-[50px] lg:leading-[62px] xl:text-[52px] xl:leading-[58px];
 }
 
 .footer-text {

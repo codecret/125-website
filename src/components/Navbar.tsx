@@ -11,7 +11,7 @@ export default function Navbar({ toggleTheme, dark }) {
 
   return (
     <nav className="w-full border-b md:border-0 z-10 flex justify-center items-center ">
-      <div className="flex justify-center items-center px-4 max-w-screen-xl mx-8 md:px-8">
+      <div className="flex justify-center items-center px-4 max-w-screen-xl mx-4 sm:mx-8 md:px-8">
         <div className="flex items-center justify-center py-3 md:py-5 md:block">
           <Link href="/">
             <Logo />
@@ -30,7 +30,7 @@ export default function Navbar({ toggleTheme, dark }) {
             state ? "block" : "hidden"
           }`}
         >
-          <ul className="ml-5 items-center space-y-8 md:flex md:space-x-6 md:space-y-0 mr-6">
+          <ul className="ml-5 items-center space-y-4 md:flex md:space-x-6 md:space-y-0 mr-6">
             {menus.map((item, id) => (
               <li
                 key={id}

@@ -28,7 +28,7 @@ const menus = [
 const pricingData = [
   {
     title: "Basic Plan",
-    monthlyPrice: 200,
+    monthlyPrice: 500,
     buttonText: "Get Started now",
     popular: false,
     inverse: false,
@@ -47,7 +47,7 @@ const pricingData = [
   },
   {
     title: "Business Plan",
-    monthlyPrice: 500,
+    monthlyPrice: 1000,
     buttonText: "Get Started Now",
     popular: true,
     inverse: true,
@@ -67,7 +67,7 @@ const pricingData = [
   },
   {
     title: "Stores Plan",
-    monthlyPrice: 400,
+    monthlyPrice: 800,
     buttonText: "Get Started Now",
     popular: false,
     inverse: false,

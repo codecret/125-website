@@ -21,13 +21,13 @@ const Pricing = () => {
   };
   return (
     <motion.section
-      className="mt-24"
+      className="mt-12 sm:mt-24"
       initial={{ y: -70 }}
       ref={ref}
       id="pricing"
     >
-      <div className="container p-5 md:p-16 md:py-0 mx-auto md:pb-16">
-        <div className="max-w-[540px] mx-auto">
+      <div className="container px-4 py-5 sm:p-5 md:p-16 md:py-0 mx-auto md:pb-16">
+        <div className="max-w-[540px] mx-auto px-2 sm:px-0">
           <h2 className="section-title-one" ref={container}>
             Pricing
           </h2>

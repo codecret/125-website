@@ -18,7 +18,7 @@ const MyProject = () => {
   ];
   return (
     <div
-      className="embla grid grid-cols-2 grid-rows-2  gap-4 w-full p-10 md:p-16 mx-auto items-center"
+      className="embla grid grid-cols-2 grid-rows-2 gap-2 sm:gap-4 w-full p-4 sm:p-10 md:p-16 mx-auto items-center"
       ref={emblaRef}
     >
       {imageSources.slice(0, 4).map((ele, index) => (

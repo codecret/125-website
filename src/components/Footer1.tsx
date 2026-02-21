@@ -37,12 +37,12 @@ const Footer1 = ({ style }: { style?: object }) => {
       </div>
       <section
         className="container mt-auto mx-auto flex flex-col items-center justify-between 
-     gap-12 px-6 text-[#EEEAEA] md:px-0 lg:flex-row lg:gap-0 lg:px-10 xl:justify-around xl:px-0"
+     gap-6 sm:gap-12 px-4 sm:px-6 text-[#EEEAEA] md:px-0 lg:flex-row lg:gap-0 lg:px-10 xl:justify-around xl:px-0"
       >
-        <JumpingMan className="h-auto w-[275px] sm:w-[315px]" />
+        <JumpingMan className="h-auto w-[80vw] max-w-[275px] sm:max-w-none sm:w-[315px]" />
         {/* large screens */}
         <h2
-          className={`font-main footer-heading-large hidden lg:block w-[500px]`}
+          className={`font-main footer-heading-large hidden lg:block max-w-[500px] w-full`}
         >
           Your business, <br /> our passion, <br /> and a product that speaks
           volumes.

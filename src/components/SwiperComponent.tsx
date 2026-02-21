@@ -64,7 +64,7 @@ const SwiperComponent = () => {
           //   } transition-opacity duration-300 ease-in-out`}
           //   aria-hidden={index !== activeIndex}
         >
-          <div className="h-[350px] rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+          <div className="h-[220px] sm:h-[350px] rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300 ease-in-out">
             <Image
               src={src}
               alt={`A screenshot of Project ${

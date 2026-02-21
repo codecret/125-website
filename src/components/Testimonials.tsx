@@ -60,7 +60,7 @@ const TestimonialCol = (props: {
 const Testimonials = () => {
   return (
     <section className="bg-white" id="testimonials">
-      <div className="container p-10 md:p-16 mx-auto">
+      <div className="container p-5 sm:p-10 md:p-16 mx-auto">
         <div className="section-heading">
           {/* <div className="flex justify-center">
             <div className="tag">Testimonials</div>
@@ -71,7 +71,7 @@ const Testimonials = () => {
             relationships with both friends and clients
           </p>
         </div>
-        <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] mt-10 max-h-[738px] overflow-hidden">
+        <div className="flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] mt-10 max-h-[500px] sm:max-h-[738px] overflow-hidden">
           <TestimonialCol testData={firstColumn} duration={15} />
           <TestimonialCol
             testData={secondColumn}

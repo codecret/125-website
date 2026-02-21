@@ -6,7 +6,7 @@ interface EventTarget {
 }
 const GridComponent = ({ elements }) => {
   return (
-    <div className="relative w-full grid md:grid-cols-2 gap-4 bg-transparent p-5">
+    <div className="relative w-full grid md:grid-cols-2 gap-2 sm:gap-4 bg-transparent p-3 sm:p-5">
       {elements.slice(0, 4).map((element, index) => (
         <motion.div
           className="relative embla__slide__img_div shadow-sm	rounded-xl bg-gray-200 dark:shadow-white "

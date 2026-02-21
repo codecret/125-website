@@ -72,7 +72,7 @@ const ContactUs = () => {
         animate={isInView ? "show" : "hidden"}
       >
         {/* section-heading */}
-        <div className="px-10">
+        <div className="px-5 sm:px-10">
           <h2 className="section-title-one mt-5 text-center md:text-left">
             Contact Us
           </h2>
@@ -86,12 +86,12 @@ const ContactUs = () => {
           width="300"
           height="300"
           objectPosition="left"
-          className="absolute -translate-x-[50%] dragAndDropImage2 flowBlock -left-[12%]"
+          className="absolute -translate-x-[50%] dragAndDropImage2 flowBlock -left-[12%] hidden md:block"
         />
       </motion.div>
       <motion.form
         onSubmit={handleSubmit}
-        className="w-full md:w-[40%] flex flex-col gap-6 z-99 mt-10 md:mt-0 px-10 md:p-0"
+        className="w-full md:w-[40%] flex flex-col gap-6 z-99 mt-10 md:mt-0 px-5 sm:px-10 md:p-0"
         variants={slideIn("right", "tween", 0.2, 1)}
         initial="hidden"
         animate={isInView ? "show" : "hidden"}

@@ -15,8 +15,8 @@ const EmblaCarousel1 = ({ slides }) => {
       ref={ref}
       className="h-screen flex flex-col items-center justify-center overflow-scroll max-w-screen"
     >
-      <h1 className="text-black font-main text-4xl">Projects</h1>
-      <p className="text-black font-main text-xl mb-10 text-center px-[200px] mt-4">
+      <h1 className="text-black font-main text-2xl sm:text-4xl">Projects</h1>
+      <p className="text-black font-main text-base sm:text-xl mb-10 text-center px-5 md:px-[200px] mt-4">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis aperiam
         nesciunt amet commodi culpa voluptas illum accusamus nisi tenetur
         quaerat.
@@ -25,7 +25,7 @@ const EmblaCarousel1 = ({ slides }) => {
         {slides.map((ele, index) => (
           <div
             key={index}
-            className="absolute min-w-[300px] h-[230px] rounded-lg"
+            className="absolute min-w-[200px] sm:min-w-[300px] h-[180px] sm:h-[230px] rounded-lg"
           >
             <Image
               src={ele.videoLink}
