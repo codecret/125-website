@@ -3,6 +3,7 @@ import "./globals.css";
 import { Roboto, Shrikhand } from "next/font/google";
 import localFont from "next/font/local";
 import { Providers } from "./providers";
+import FloatingContact from "@/components/FloatingContact";
 
 // const mainFont = Arima({
 //   weight: ["100", "200", "300", "400", "500", "600", "700"],
@@ -44,7 +45,10 @@ export default function RootLayout({
       <body
         className={`${mainFont.variable} ${shrinkHand.variable} ${roboto.variable} font-roboto antialiased `}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <FloatingContact />
+        </Providers>
       </body>
     </html>
   );
