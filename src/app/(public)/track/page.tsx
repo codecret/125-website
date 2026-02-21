@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import { trpc } from "@/trpc/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
 import { STATUS_VALUES, STATUS_LABELS, type ApplicationStatus } from "@/lib/validators";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 
 const STATUS_VARIANT: Record<ApplicationStatus, "default" | "secondary" | "destructive" | "outline" | "success" | "warning"> = {
   submitted: "secondary",
@@ -18,6 +15,39 @@ const STATUS_VARIANT: Record<ApplicationStatus, "default" | "secondary" | "destr
   in_development: "default",
   completed: "success",
   rejected: "destructive",
+};
+
+const STATUS_ICONS: Record<string, React.ReactNode> = {
+  submitted: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+  ),
+  in_review: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+  ),
+  proposal_sent: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+    </svg>
+  ),
+  approved: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  ),
+  in_development: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    </svg>
+  ),
+  completed: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+    </svg>
+  ),
 };
 
 const PROGRESS_STATUSES = STATUS_VALUES.filter((s) => s !== "rejected");
@@ -50,175 +80,267 @@ export default function TrackPage() {
     : -1;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <Link href="/" className="text-sm text-gray-500 hover:text-gray-700 mb-4 inline-block">
-            &larr; Back to Home
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Hero background */}
+      <div className="absolute inset-0 bg-primary backgroundblue" />
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-15"
+        style={{ backgroundImage: "url('/codingwallpaperoptimized1.com-optimize.gif')" }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Nav */}
+        <div className="flex items-center justify-between px-6 sm:px-10 py-5">
+          <Link href="/">
+            <Logo color="#fff" />
           </Link>
-          <h1 className="text-3xl font-bold">Track Your Application</h1>
-          <p className="text-gray-600 mt-2">
-            Enter your application ID to check the current status.
-          </p>
+          <Link
+            href="/"
+            className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1.5"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Home
+          </Link>
         </div>
 
-        <Card className="mb-6">
-          <CardContent className="pt-6">
-            <form onSubmit={handleSubmit} className="flex gap-3">
-              <div className="flex-1">
-                <Label htmlFor="applicationId" className="sr-only">Application ID</Label>
-                <Input
-                  id="applicationId"
+        {/* Main content */}
+        <div className="flex-1 flex flex-col items-center justify-center px-4 pb-12">
+          {/* Title section */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full px-4 py-1.5 mb-5">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <span className="text-white/80 text-sm">Live Status Tracking</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3 font-main">
+              Track Your Project
+            </h1>
+            <p className="text-white/60 text-base sm:text-lg max-w-md mx-auto">
+              Enter your application ID to see real-time progress updates
+            </p>
+          </div>
+
+          {/* Search box */}
+          <div className="w-full max-w-xl mb-8">
+            <form onSubmit={handleSubmit} className="relative">
+              <div className="flex items-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-2 focus-within:border-white/40 transition-colors">
+                <div className="pl-4 pr-2">
+                  <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                <input
                   value={applicationId}
                   onChange={(e) => {
                     setApplicationId(e.target.value);
                     if (error) setError("");
                   }}
                   placeholder="CC-2026-0001"
-                  className="font-mono"
+                  className="flex-1 bg-transparent text-white placeholder-white/30 font-mono text-lg py-3 px-2 outline-none"
                 />
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="bg-white text-primary font-semibold px-6 py-3 rounded-xl hover:bg-white/90 transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {isLoading ? (
+                    <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  ) : "Track"}
+                </button>
               </div>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Searching..." : "Track"}
-              </Button>
+              {error && (
+                <p className="text-red-300 text-sm mt-3 pl-4">{error}</p>
+              )}
             </form>
-            {error && (
-              <p className="text-sm text-red-500 mt-2">{error}</p>
-            )}
-          </CardContent>
-        </Card>
+          </div>
 
-        {isError && (
-          <Card>
-            <CardContent className="pt-6 text-center">
-              <p className="text-red-500">Something went wrong. Please try again.</p>
-            </CardContent>
-          </Card>
-        )}
-
-        {searchId && data === null && !isLoading && (
-          <Card>
-            <CardContent className="pt-6 text-center">
-              <div className="mx-auto mb-4 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
-                </svg>
+          {/* Error state */}
+          {isError && (
+            <div className="w-full max-w-xl">
+              <div className="bg-red-500/10 backdrop-blur-md border border-red-500/20 rounded-2xl p-6 text-center">
+                <p className="text-red-300">Something went wrong. Please try again.</p>
               </div>
-              <p className="text-gray-600 font-medium">No application found</p>
-              <p className="text-sm text-gray-500 mt-1">
-                Please check your application ID and try again.
-              </p>
-            </CardContent>
-          </Card>
-        )}
+            </div>
+          )}
 
-        {data && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl">Application Status</CardTitle>
-                  <Badge variant={STATUS_VARIANT[data.status as ApplicationStatus] || "secondary"}>
+          {/* Not found state */}
+          {searchId && data === null && !isLoading && (
+            <div className="w-full max-w-xl">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-10 text-center">
+                <div className="mx-auto mb-5 w-20 h-20 bg-white/10 rounded-full flex items-center justify-center">
+                  <svg className="w-10 h-10 text-white/40" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
+                </div>
+                <p className="text-white text-lg font-semibold mb-1">No application found</p>
+                <p className="text-white/50 text-sm">
+                  Please check your application ID and try again.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Results */}
+          {data && (
+            <div className="w-full max-w-2xl space-y-5">
+              {/* Status card */}
+              <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl overflow-hidden">
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 pb-4">
+                  <div>
+                    <p className="text-white/50 text-sm mb-1">Application</p>
+                    <p className="text-white font-mono text-2xl font-bold">{data.applicationId}</p>
+                  </div>
+                  <Badge
+                    variant={STATUS_VARIANT[data.status as ApplicationStatus] || "secondary"}
+                    className="text-sm px-4 py-1.5 rounded-full"
+                  >
                     {STATUS_LABELS[data.status as ApplicationStatus] || data.status}
                   </Badge>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-500">Application ID</p>
-                    <p className="font-mono font-semibold">{data.applicationId}</p>
+
+                {/* Info grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/5">
+                  <div className="bg-white/5 p-4 text-center">
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Applicant</p>
+                    <p className="text-white font-medium text-sm truncate">{data.fullName}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500">Applicant</p>
-                    <p className="font-semibold">{data.fullName}</p>
+                  <div className="bg-white/5 p-4 text-center">
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Project</p>
+                    <p className="text-white font-medium text-sm truncate">{data.projectType}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500">Project Type</p>
-                    <p className="font-semibold">{data.projectType}</p>
+                  <div className="bg-white/5 p-4 text-center">
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Submitted</p>
+                    <p className="text-white font-medium text-sm">{new Date(data.createdAt).toLocaleDateString()}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500">Submitted</p>
-                    <p className="font-semibold">
-                      {new Date(data.createdAt).toLocaleDateString()}
-                    </p>
+                  <div className="bg-white/5 p-4 text-center">
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Updated</p>
+                    <p className="text-white font-medium text-sm">{new Date(data.updatedAt).toLocaleDateString()}</p>
                   </div>
                 </div>
+              </div>
 
-                {/* Progress Timeline */}
-                {data.status !== "rejected" && (
-                  <div>
-                    <p className="text-sm font-medium text-gray-700 mb-3">Progress</p>
-                    <div className="flex items-center gap-0">
-                      {PROGRESS_STATUSES.map((status, index) => {
-                        const isCompleted = index <= currentStepIndex;
-                        const isCurrent = index === currentStepIndex;
-                        return (
-                          <div key={status} className="flex items-center flex-1 last:flex-none">
-                            <div className="flex flex-col items-center">
-                              <div
-                                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 ${
-                                  isCurrent
-                                    ? "border-primary bg-primary text-white"
-                                    : isCompleted
-                                    ? "border-green-500 bg-green-500 text-white"
-                                    : "border-gray-300 bg-white text-gray-400"
-                                }`}
-                              >
-                                {isCompleted && !isCurrent ? (
-                                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                  </svg>
-                                ) : (
-                                  index + 1
-                                )}
-                              </div>
-                              <p className={`text-[10px] mt-1 text-center leading-tight max-w-[70px] ${
-                                isCurrent ? "font-semibold text-primary" : isCompleted ? "text-green-600" : "text-gray-400"
-                              }`}>
-                                {STATUS_LABELS[status]}
-                              </p>
+              {/* Progress timeline */}
+              {data.status !== "rejected" && (
+                <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
+                  <p className="text-white/60 text-sm font-medium mb-6 uppercase tracking-wider">Progress Timeline</p>
+                  <div className="space-y-0">
+                    {PROGRESS_STATUSES.map((status, index) => {
+                      const isCompleted = index < currentStepIndex;
+                      const isCurrent = index === currentStepIndex;
+                      return (
+                        <div key={status} className="flex items-start gap-4">
+                          {/* Connector line + dot */}
+                          <div className="flex flex-col items-center">
+                            <div
+                              className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                                isCurrent
+                                  ? "bg-white text-primary shadow-lg shadow-white/20"
+                                  : isCompleted
+                                  ? "bg-green-500/20 text-green-400 border-2 border-green-500/40"
+                                  : "bg-white/5 text-white/20 border border-white/10"
+                              }`}
+                            >
+                              {isCompleted ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                              ) : (
+                                STATUS_ICONS[status] || <span className="text-sm font-bold">{index + 1}</span>
+                              )}
                             </div>
                             {index < PROGRESS_STATUSES.length - 1 && (
-                              <div className={`flex-1 h-0.5 mx-1 mt-[-16px] ${
-                                index < currentStepIndex ? "bg-green-500" : "bg-gray-200"
+                              <div className={`w-0.5 h-8 my-1 ${
+                                isCompleted ? "bg-green-500/40" : "bg-white/10"
                               }`} />
                             )}
                           </div>
-                        );
-                      })}
-                    </div>
+                          {/* Label */}
+                          <div className="pt-2 pb-4">
+                            <p className={`text-sm font-medium ${
+                              isCurrent
+                                ? "text-white"
+                                : isCompleted
+                                ? "text-green-400/80"
+                                : "text-white/30"
+                            }`}>
+                              {STATUS_LABELS[status]}
+                            </p>
+                            {isCurrent && (
+                              <p className="text-white/40 text-xs mt-0.5">Current stage</p>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                )}
-
-                {data.status === "rejected" && (
-                  <div className="bg-red-50 text-red-700 p-4 rounded-md text-sm">
-                    This application has been declined. Please contact us if you have questions.
-                  </div>
-                )}
-
-                {data.adminNotes && (
-                  <div>
-                    <p className="text-sm font-medium text-gray-700 mb-1">Notes from our team</p>
-                    <div className="bg-blue-50 text-blue-800 p-4 rounded-md text-sm whitespace-pre-wrap">
-                      {data.adminNotes}
-                    </div>
-                  </div>
-                )}
-
-                <div className="text-xs text-gray-400 text-right">
-                  Last updated: {new Date(data.updatedAt).toLocaleString()}
                 </div>
-              </CardContent>
-            </Card>
+              )}
 
-            <div className="text-center">
-              <Link href="/apply">
-                <Button variant="outline">Submit Another Application</Button>
-              </Link>
+              {/* Rejected notice */}
+              {data.status === "rejected" && (
+                <div className="bg-red-500/10 backdrop-blur-md border border-red-500/20 rounded-2xl p-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-red-300 font-medium">Application Declined</p>
+                      <p className="text-red-300/60 text-sm mt-1">
+                        This application has been declined. Please contact us if you have questions.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Admin notes */}
+              {data.adminNotes && (
+                <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center shrink-0">
+                      <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-white/60 text-sm font-medium mb-2">Message from our team</p>
+                      <p className="text-white/80 text-sm whitespace-pre-wrap leading-relaxed">
+                        {data.adminNotes}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="flex justify-center gap-4 pt-2">
+                <Link
+                  href="/apply"
+                  className="inline-flex items-center gap-2 bg-white text-primary font-semibold px-6 py-3 rounded-xl hover:bg-white/90 transition-colors text-sm"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  New Application
+                </Link>
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 font-medium px-6 py-3 rounded-xl hover:bg-white/20 transition-colors text-sm"
+                >
+                  Back to Home
+                </Link>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
