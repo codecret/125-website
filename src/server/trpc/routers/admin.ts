@@ -4,6 +4,7 @@ import {
   listApplicationsSchema,
   updateStatusSchema,
   updateNotesSchema,
+  updateApplicationSchema,
   adminCreateSchema,
   STATUS_VALUES,
   STATUS_LABELS,
@@ -138,6 +139,35 @@ export const adminRouter = router({
         .update(application)
         .set({
           adminNotes: input.adminNotes,
+          updatedAt: new Date(),
+        })
+        .where(eq(application.id, input.id));
+
+      return { success: true };
+    }),
+
+  updateApplication: adminProcedure
+    .input(updateApplicationSchema)
+    .mutation(async ({ ctx, input }) => {
+      const [existing] = await ctx.db
+        .select()
+        .from(application)
+        .where(eq(application.id, input.id))
+        .limit(1);
+
+      if (!existing) {
+        throw new Error("Application not found");
+      }
+
+      await ctx.db
+        .update(application)
+        .set({
+          fullName: input.fullName,
+          email: input.email,
+          projectType: input.projectType,
+          budgetRange: input.budgetRange,
+          timeline: input.timeline,
+          description: input.description,
           updatedAt: new Date(),
         })
         .where(eq(application.id, input.id));
