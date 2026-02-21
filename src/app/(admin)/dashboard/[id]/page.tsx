@@ -6,6 +6,7 @@ import { trpc } from "@/trpc/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -15,6 +16,7 @@ import {
   type ApplicationStatus,
 } from "@/lib/validators";
 import Link from "next/link";
+import { EMAIL_TEMPLATES, applyTemplate } from "@/lib/email-templates";
 
 const STATUS_VARIANT: Record<
   ApplicationStatus,
@@ -40,6 +42,8 @@ export default function ApplicationDetailPage() {
   const [statusNote, setStatusNote] = useState("");
   const [adminNotes, setAdminNotes] = useState("");
   const [notesInitialized, setNotesInitialized] = useState(false);
+  const [emailSubject, setEmailSubject] = useState("");
+  const [emailBody, setEmailBody] = useState("");
 
   const utils = trpc.useUtils();
 
@@ -56,6 +60,21 @@ export default function ApplicationDetailPage() {
   const updateNotesMutation = trpc.admin.updateNotes.useMutation({
     onSuccess: () => {
       refetch();
+    },
+  });
+
+  const sendEmailMutation = trpc.admin.sendEmail.useMutation({
+    onSuccess: () => {
+      setEmailSubject("");
+      setEmailBody("");
+    },
+  });
+
+  const deleteMutation = trpc.admin.delete.useMutation({
+    onSuccess: () => {
+      utils.admin.list.invalidate();
+      utils.admin.getStats.invalidate();
+      router.replace("/dashboard");
     },
   });
 
@@ -280,6 +299,104 @@ export default function ApplicationDetailPage() {
               {updateNotesMutation.isSuccess && (
                 <p className="text-sm text-green-600">Notes saved.</p>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Send Email */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Send Email</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-xs text-gray-500">To: {app.fullName} &lt;{app.email}&gt;</p>
+              <div className="space-y-2">
+                <Label>Template</Label>
+                <Select
+                  value=""
+                  onChange={(e) => {
+                    const tpl = EMAIL_TEMPLATES.find((t) => t.id === e.target.value);
+                    if (tpl) {
+                      const filled = applyTemplate(tpl, {
+                        name: app.fullName,
+                        applicationId: app.applicationId,
+                      });
+                      setEmailSubject(filled.subject);
+                      setEmailBody(filled.body);
+                    }
+                  }}
+                >
+                  <option value="">Choose a template...</option>
+                  {EMAIL_TEMPLATES.map((tpl) => (
+                    <option key={tpl.id} value={tpl.id}>
+                      {tpl.label}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Subject</Label>
+                <Input
+                  value={emailSubject}
+                  onChange={(e) => setEmailSubject(e.target.value)}
+                  placeholder={`Re: ${app.applicationId}`}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Message</Label>
+                <Textarea
+                  value={emailBody}
+                  onChange={(e) => setEmailBody(e.target.value)}
+                  placeholder="Write your message or pick a template above..."
+                  className="min-h-[120px]"
+                />
+              </div>
+              <Button
+                className="w-full"
+                disabled={
+                  !emailSubject ||
+                  !emailBody ||
+                  sendEmailMutation.isPending
+                }
+                onClick={() => {
+                  sendEmailMutation.mutate({
+                    id: app.id,
+                    subject: emailSubject,
+                    body: emailBody,
+                  });
+                }}
+              >
+                {sendEmailMutation.isPending ? "Sending..." : "Send Email"}
+              </Button>
+              {sendEmailMutation.isSuccess && (
+                <p className="text-sm text-green-600">Email sent.</p>
+              )}
+              {sendEmailMutation.error && (
+                <p className="text-sm text-red-500">Failed to send email.</p>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Delete */}
+          <Card>
+            <CardContent className="pt-6">
+              <Button
+                variant="destructive"
+                className="w-full"
+                disabled={deleteMutation.isPending}
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      `Delete application ${app.applicationId}? This cannot be undone.`
+                    )
+                  ) {
+                    deleteMutation.mutate({ id: app.id });
+                  }
+                }}
+              >
+                {deleteMutation.isPending
+                  ? "Deleting..."
+                  : "Delete Application"}
+              </Button>
             </CardContent>
           </Card>
         </div>

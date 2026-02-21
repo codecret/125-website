@@ -4,7 +4,7 @@ import { application, statusHistory } from "@/server/db/schema";
 import { eq, sql, and, like } from "drizzle-orm";
 import { sendEmail } from "@/lib/email";
 
-async function generateApplicationId(
+export async function generateApplicationId(
   db: any
 ): Promise<string> {
   const year = new Date().getFullYear();

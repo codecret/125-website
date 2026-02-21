@@ -78,6 +78,19 @@ export const updateNotesSchema = z.object({
   adminNotes: z.string(),
 });
 
+export const adminCreateSchema = z.object({
+  fullName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  projectType: z.string().min(1, "Project type is required"),
+  budgetRange: z.string().min(1, "Budget range is required"),
+  timeline: z.string().min(1, "Timeline is required"),
+  description: z
+    .string()
+    .min(5, "Description must be at least 5 characters"),
+  status: z.enum(STATUS_VALUES).default("submitted"),
+  adminNotes: z.string().optional(),
+});
+
 export const listApplicationsSchema = z.object({
   status: z.enum(STATUS_VALUES).optional(),
   search: z.string().optional(),
