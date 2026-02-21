@@ -158,41 +158,109 @@ export default function ApplicationDetailPage() {
             <CardHeader>
               <CardTitle>Application Details</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="text-gray-500">Full Name</p>
-                  <p className="font-medium">{app.fullName}</p>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Full Name</Label>
+                  <Input
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                  />
                 </div>
-                <div>
-                  <p className="text-gray-500">Email</p>
-                  <p className="font-medium">{app.email}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Project Type</p>
-                  <p className="font-medium">{app.projectType}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Budget Range</p>
-                  <p className="font-medium">{app.budgetRange}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Timeline</p>
-                  <p className="font-medium">{app.timeline}</p>
-                </div>
-                <div>
-                  <p className="text-gray-500">Submitted</p>
-                  <p className="font-medium">
-                    {new Date(app.createdAt).toLocaleString()}
-                  </p>
+                <div className="space-y-2">
+                  <Label>Email</Label>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
               </div>
-              <div className="mt-4">
-                <p className="text-gray-500 text-sm">Description</p>
-                <p className="mt-1 text-sm whitespace-pre-wrap bg-gray-50 p-3 rounded-md">
-                  {app.description}
-                </p>
+              <div className="space-y-2">
+                <Label>Project Type</Label>
+                <Select
+                  value={projectType}
+                  onChange={(e) => setProjectType(e.target.value)}
+                >
+                  <option value="">Select...</option>
+                  {PROJECT_TYPES.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+                </Select>
               </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Budget Range</Label>
+                  <Select
+                    value={budgetRange}
+                    onChange={(e) => setBudgetRange(e.target.value)}
+                  >
+                    <option value="">Select...</option>
+                    {BUDGET_RANGES.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Timeline</Label>
+                  <Select
+                    value={timeline}
+                    onChange={(e) => setTimeline(e.target.value)}
+                  >
+                    <option value="">Select...</option>
+                    {TIMELINES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Description</Label>
+                <Textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="min-h-[120px]"
+                />
+              </div>
+              <p className="text-sm text-gray-500">
+                Submitted: {new Date(app.createdAt).toLocaleString()}
+              </p>
+              <Button
+                disabled={
+                  updateApplicationMutation.isPending ||
+                  !fullName.trim() ||
+                  !email.trim() ||
+                  !projectType ||
+                  !budgetRange ||
+                  !timeline ||
+                  !description.trim()
+                }
+                onClick={() => {
+                  updateApplicationMutation.mutate({
+                    id: app.id,
+                    fullName: fullName.trim(),
+                    email: email.trim(),
+                    projectType,
+                    budgetRange,
+                    timeline,
+                    description: description.trim(),
+                  });
+                }}
+              >
+                {updateApplicationMutation.isPending ? "Saving..." : "Save details"}
+              </Button>
+              {updateApplicationMutation.isSuccess && (
+                <p className="text-sm text-green-600">Details saved.</p>
+              )}
+              {updateApplicationMutation.error && (
+                <p className="text-sm text-red-500">Failed to save details.</p>
+              )}
             </CardContent>
           </Card>
 
