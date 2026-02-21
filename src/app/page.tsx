@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
 import Pricing from "../components/Pricing";
 import Testimonials from "../components/Testimonials";
 import ContactUs from "@/components/ContactUs";
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <div>
+      <Navbar toggleTheme={toggleTheme} dark={dark} />
       <div className="overflow-hidden z-30 relative bg-white" ref={targetRef}>
         <Hero toggleTheme={toggleTheme} dark={dark} refVar={targetRef} />
         {/* <EmblaCarousel1 slides={imageSources} options={OPTIONS} /> */}

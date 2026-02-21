@@ -2,56 +2,64 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Moon, Sun } from "lucide-react";
 import Logo from "./Logo";
 import { menus } from "@/lib/data";
 
 export default function Navbar({ toggleTheme, dark }) {
-  const [state, setState] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 100);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="w-full border-b md:border-0 z-10 flex justify-center items-center ">
-      <div className="flex justify-center items-center px-4 max-w-screen-xl mx-4 sm:mx-8 md:px-8">
-        <div className="flex items-center justify-center py-3 md:py-5 md:block">
-          <Link href="/">
-            <Logo />
-          </Link>
-          {/* <div className="md:hidden">
-            <button
-              className="text-white outline-none p-2 rounded-md focus:border-gray-400 focus:border"
-              onClick={() => setState(!state)}
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 flex justify-center transition-all duration-500 ${
+        scrolled ? "py-3 px-4" : "py-0 px-0"
+      }`}
+    >
+      <div
+        className={`flex items-center justify-between transition-all duration-500 ${
+          scrolled
+            ? "max-w-3xl w-full bg-white/90 backdrop-blur-xl shadow-lg shadow-black/5 rounded-full px-3 py-1.5"
+            : "w-full bg-transparent px-6 sm:px-10 py-4"
+        }`}
+      >
+        <Link href="/">
+          <Logo color={scrolled ? "#3139fb" : "#fff"} />
+        </Link>
+
+        <div className="hidden md:flex items-center gap-1">
+          {menus.map((item, id) => (
+            <Link
+              key={id}
+              href={item.path}
+              className={`font-roboto text-sm px-3 py-1.5 rounded-full transition-colors ${
+                scrolled
+                  ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                  : "text-white/80 hover:text-white"
+              }`}
             >
-              <Menu />
-            </button>
-          </div> */}
+              {item.title}
+            </Link>
+          ))}
         </div>
-        <div
-          className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-            state ? "block" : "hidden"
+
+        <Link
+          href="/track"
+          className={`font-roboto inline-flex items-center gap-1.5 text-sm px-4 py-1.5 rounded-full transition-all duration-300 ${
+            scrolled
+              ? "bg-primary text-white hover:bg-primary/90"
+              : "bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-sm"
           }`}
         >
-          <ul className="ml-5 items-center space-y-4 md:flex md:space-x-6 md:space-y-0 mr-6">
-            {menus.map((item, id) => (
-              <li
-                key={id}
-                className="text-white hover:text-gray-400 dark:hover:text-slate-200 font-main"
-              >
-                <Link href={item.path} className="font-roboto">
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-            {/* <button
-              type="button"
-              data-theme-toggle
-              aria-label="Change to light theme"
-              className="dark:block"
-              onClick={toggleTheme}
-            >
-              {dark ? <Sun color="white" /> : <Moon color="white" />}
-            </button> */}
-          </ul>
-        </div>
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          Track Status
+        </Link>
       </div>
     </nav>
   );
