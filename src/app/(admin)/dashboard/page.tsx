@@ -15,6 +15,7 @@ import {
 } from "@/lib/validators";
 import Link from "next/link";
 import { EMAIL_TEMPLATES, applyTemplate } from "@/lib/email-templates";
+import { ApplicationEditDialog } from "@/components/ApplicationEditDialog";
 
 const STATUS_VARIANT: Record<
   ApplicationStatus,
@@ -34,12 +35,14 @@ function ActionsMenu({
   onStatusChange,
   onDelete,
   onSendEmail,
+  onEdit,
   isUpdating,
 }: {
   app: { id: string; applicationId: string; status: string; email: string; fullName: string };
   onStatusChange: (id: string, status: ApplicationStatus) => void;
   onDelete: (id: string, label: string) => void;
   onSendEmail: (id: string) => void;
+  onEdit: (id: string) => void;
   isUpdating: boolean;
 }) {
   const [open, setOpen] = useState(false);
@@ -102,14 +105,17 @@ function ActionsMenu({
             className="fixed w-48 bg-white rounded-md shadow-lg border z-9999"
             style={{ top: pos.top, left: pos.left }}
           >
-            {/* View */}
-            <Link
-              href={`/dashboard/${app.id}`}
-              className="block px-4 py-2 text-sm hover:bg-gray-50"
-              onClick={() => setOpen(false)}
+            {/* Edit (opens dialog) */}
+            <button
+              type="button"
+              className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50"
+              onClick={() => {
+                onEdit(app.id);
+                setOpen(false);
+              }}
             >
-              View Details
-            </Link>
+              Edit
+            </button>
 
             {/* Copy ID */}
             <button
@@ -212,6 +218,20 @@ export default function DashboardPage() {
   const [emailTarget, setEmailTarget] = useState<{ id: string; email: string; applicationId: string; fullName: string } | null>(null);
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
+  const [editDialogAppId, setEditDialogAppId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!emailTarget) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setEmailTarget(null);
+        setEmailSubject("");
+        setEmailBody("");
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [emailTarget]);
 
   const utils = trpc.useUtils();
   const stats = trpc.admin.getStats.useQuery();
@@ -448,6 +468,7 @@ export default function DashboardPage() {
                         onStatusChange={handleStatusChange}
                         onDelete={handleDelete}
                         onSendEmail={handleSendEmail}
+                        onEdit={(id) => setEditDialogAppId(id)}
                         isUpdating={updateStatusMutation.isPending}
                       />
                     </td>
@@ -459,12 +480,41 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
 
-      {/* Email Modal */}
+      {/* Edit Application Dialog */}
+      {editDialogAppId && (
+        <ApplicationEditDialog
+          appId={editDialogAppId}
+          onClose={() => setEditDialogAppId(null)}
+        />
+      )}
+
+      {/* Email Modal - window-style */}
       {emailTarget &&
         createPortal(
-          <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/50">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-lg mx-4 p-6">
-              <h3 className="text-lg font-semibold mb-1">Send Email</h3>
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
+            onClick={(e) => e.target === e.currentTarget && (setEmailTarget(null), setEmailSubject(""), setEmailBody(""))}
+          >
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-lg mx-4 overflow-hidden border border-gray-200 flex flex-col max-h-[90vh]">
+              {/* Window title bar */}
+              <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
+                <h3 className="text-base font-semibold text-gray-900">Send Email</h3>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEmailTarget(null);
+                    setEmailSubject("");
+                    setEmailBody("");
+                  }}
+                  className="p-1.5 rounded-md text-gray-500 hover:bg-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                  aria-label="Close"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="p-4 overflow-y-auto flex-1">
               <p className="text-sm text-gray-500 mb-4">To: {emailTarget.fullName} &lt;{emailTarget.email}&gt;</p>
               <div className="space-y-3">
                 <div>
@@ -538,6 +588,7 @@ export default function DashboardPage() {
                 {sendEmailMutation.error && (
                   <p className="text-sm text-red-500">Failed to send email.</p>
                 )}
+              </div>
               </div>
             </div>
           </div>,
