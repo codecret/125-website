@@ -259,6 +259,16 @@ export const adminRouter = router({
       return { success: true };
     }),
 
+  deleteStatusHistory: adminProcedure
+    .input(z.object({ id: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db
+        .delete(statusHistory)
+        .where(eq(statusHistory.id, input.id));
+
+      return { success: true };
+    }),
+
   export: adminProcedure.query(async ({ ctx }) => {
     const items = await ctx.db
       .select()

@@ -92,6 +92,12 @@ export default function ApplicationDetailPage() {
     },
   });
 
+  const deleteHistoryMutation = trpc.admin.deleteStatusHistory.useMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
+
   const deleteMutation = trpc.admin.delete.useMutation({
     onSuccess: () => {
       utils.admin.list.invalidate();
@@ -293,6 +299,20 @@ export default function ApplicationDetailPage() {
                           {entry.changedByName && ` by ${entry.changedByName}`}
                         </p>
                       </div>
+                      <button
+                        className="text-gray-300 hover:text-red-500 transition-colors shrink-0 self-start mt-0.5 cursor-pointer"
+                        title="Delete this entry"
+                        disabled={deleteHistoryMutation.isPending}
+                        onClick={() => {
+                          if (window.confirm("Delete this status history entry?")) {
+                            deleteHistoryMutation.mutate({ id: entry.id });
+                          }
+                        }}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
                     </div>
                   ))}
                 </div>
