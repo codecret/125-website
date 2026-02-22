@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { Badge } from "@/components/ui/badge";
@@ -54,6 +54,14 @@ const STATUS_ICONS: Record<string, React.ReactNode> = {
 const PROGRESS_STATUSES = STATUS_VALUES.filter((s) => s !== "rejected");
 
 export default function TrackPage() {
+  return (
+    <Suspense>
+      <TrackPageContent />
+    </Suspense>
+  );
+}
+
+function TrackPageContent() {
   const searchParams = useSearchParams();
   const [applicationId, setApplicationId] = useState("");
   const [searchId, setSearchId] = useState("");
