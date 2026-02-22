@@ -3,7 +3,7 @@ import { router, adminProcedure } from "../init";
 import {
   listApplicationsSchema,
   updateStatusSchema,
-  updateNotesSchema,
+
   updateApplicationSchema,
   adminCreateSchema,
   STATUS_VALUES,
@@ -104,7 +104,6 @@ export const adminRouter = router({
         .update(application)
         .set({
           status: input.status,
-          ...(input.note ? { adminNotes: input.note } : {}),
           updatedAt: new Date(),
         })
         .where(eq(application.id, input.id));
@@ -131,20 +130,6 @@ export const adminRouter = router({
       } catch (e) {
         console.error("Failed to send status update email:", e);
       }
-
-      return { success: true };
-    }),
-
-  updateNotes: adminProcedure
-    .input(updateNotesSchema)
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db
-        .update(application)
-        .set({
-          adminNotes: input.adminNotes,
-          updatedAt: new Date(),
-        })
-        .where(eq(application.id, input.id));
 
       return { success: true };
     }),
@@ -194,7 +179,6 @@ export const adminRouter = router({
           timeline: input.timeline,
           description: input.description,
           status: input.status,
-          adminNotes: input.adminNotes || null,
         })
         .returning();
 

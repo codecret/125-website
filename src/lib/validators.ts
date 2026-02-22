@@ -73,11 +73,6 @@ export const updateStatusSchema = z.object({
   note: z.string().optional(),
 });
 
-export const updateNotesSchema = z.object({
-  id: z.string().uuid(),
-  adminNotes: z.string(),
-});
-
 export const updateApplicationSchema = z.object({
   id: z.string().uuid(),
   fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -98,7 +93,6 @@ export const adminCreateSchema = z.object({
     .string()
     .min(5, "Description must be at least 5 characters"),
   status: z.enum(STATUS_VALUES).default("submitted"),
-  adminNotes: z.string().optional(),
 });
 
 export const listApplicationsSchema = z.object({

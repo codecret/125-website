@@ -45,8 +45,7 @@ export function ApplicationEditDialog({
 
   const [newStatus, setNewStatus] = useState("");
   const [statusNote, setStatusNote] = useState("");
-  const [adminNotes, setAdminNotes] = useState("");
-  const [notesInitialized, setNotesInitialized] = useState(false);
+
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
   const [fullName, setFullName] = useState("");
@@ -56,13 +55,6 @@ export function ApplicationEditDialog({
   const [timeline, setTimeline] = useState("");
   const [description, setDescription] = useState("");
   const [detailsInitialized, setDetailsInitialized] = useState(false);
-
-  useEffect(() => {
-    if (app?.adminNotes !== undefined && !notesInitialized) {
-      setAdminNotes(app.adminNotes || "");
-      setNotesInitialized(true);
-    }
-  }, [app?.adminNotes, notesInitialized]);
 
   useEffect(() => {
     setDetailsInitialized(false);
@@ -86,12 +78,6 @@ export function ApplicationEditDialog({
       setStatusNote("");
       utils.admin.list.invalidate();
       utils.admin.getStats.invalidate();
-      utils.admin.getById.invalidate({ id: appId });
-    },
-  });
-
-  const updateNotesMutation = trpc.admin.updateNotes.useMutation({
-    onSuccess: () => {
       utils.admin.getById.invalidate({ id: appId });
     },
   });
@@ -301,32 +287,6 @@ export function ApplicationEditDialog({
                 }}
               >
                 {updateStatusMutation.isPending ? "Updating..." : "Update Status"}
-              </Button>
-            </CardContent>
-          </Card>
-
-          {/* Admin Notes */}
-          <Card>
-            <CardHeader className="py-3">
-              <CardTitle className="text-sm">Admin Notes</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 py-0 pb-3">
-              <Textarea
-                value={adminNotes}
-                onChange={(e) => setAdminNotes(e.target.value)}
-                placeholder="Internal notes..."
-                className="min-h-[80px] text-sm"
-              />
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full"
-                disabled={updateNotesMutation.isPending}
-                onClick={() =>
-                  updateNotesMutation.mutate({ id: app.id, adminNotes })
-                }
-              >
-                {updateNotesMutation.isPending ? "Saving..." : "Save Notes"}
               </Button>
             </CardContent>
           </Card>

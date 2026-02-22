@@ -298,7 +298,7 @@ export default function DashboardPage() {
       "Timeline",
       "Status",
       "Description",
-      "Admin Notes",
+
       "Created",
       "Updated",
     ];
@@ -312,7 +312,7 @@ export default function DashboardPage() {
       app.timeline,
       STATUS_LABELS[app.status as ApplicationStatus] || app.status,
       `"${(app.description || "").replace(/"/g, '""')}"`,
-      `"${(app.adminNotes || "").replace(/"/g, '""')}"`,
+
       new Date(app.createdAt).toLocaleString(),
       new Date(app.updatedAt).toLocaleString(),
     ]);

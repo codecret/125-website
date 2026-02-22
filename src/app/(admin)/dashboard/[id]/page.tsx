@@ -43,8 +43,7 @@ export default function ApplicationDetailPage() {
 
   const [newStatus, setNewStatus] = useState("");
   const [statusNote, setStatusNote] = useState("");
-  const [adminNotes, setAdminNotes] = useState("");
-  const [notesInitialized, setNotesInitialized] = useState(false);
+
   const [emailSubject, setEmailSubject] = useState("");
   const [emailBody, setEmailBody] = useState("");
   const [fullName, setFullName] = useState("");
@@ -79,12 +78,6 @@ export default function ApplicationDetailPage() {
     },
   });
 
-  const updateNotesMutation = trpc.admin.updateNotes.useMutation({
-    onSuccess: () => {
-      refetch();
-    },
-  });
-
   const updateApplicationMutation = trpc.admin.updateApplication.useMutation({
     onSuccess: () => {
       refetch();
@@ -106,12 +99,6 @@ export default function ApplicationDetailPage() {
       router.replace("/dashboard");
     },
   });
-
-  // Initialize admin notes when data loads
-  if (app && !notesInitialized) {
-    setAdminNotes(app.adminNotes || "");
-    setNotesInitialized(true);
-  }
 
   if (isLoading) {
     return (
@@ -364,37 +351,6 @@ export default function ApplicationDetailPage() {
                 <p className="text-sm text-red-500">
                   Failed to update status. Try again.
                 </p>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Admin Notes */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">Admin Notes</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <Textarea
-                value={adminNotes}
-                onChange={(e) => setAdminNotes(e.target.value)}
-                placeholder="Internal notes about this application..."
-                className="min-h-[120px]"
-              />
-              <Button
-                variant="outline"
-                className="w-full"
-                disabled={updateNotesMutation.isPending}
-                onClick={() => {
-                  updateNotesMutation.mutate({
-                    id: app.id,
-                    adminNotes,
-                  });
-                }}
-              >
-                {updateNotesMutation.isPending ? "Saving..." : "Save Notes"}
-              </Button>
-              {updateNotesMutation.isSuccess && (
-                <p className="text-sm text-green-600">Notes saved.</p>
               )}
             </CardContent>
           </Card>

@@ -28,7 +28,7 @@ export default function NewTicketPage() {
     timeline: "",
     description: "",
     status: "submitted" as string,
-    adminNotes: "",
+
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -210,18 +210,6 @@ export default function NewTicketPage() {
               {errors.description && (
                 <p className="text-sm text-red-500">{errors.description}</p>
               )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="adminNotes">Internal Notes (optional)</Label>
-              <Textarea
-                id="adminNotes"
-                name="adminNotes"
-                value={formData.adminNotes}
-                onChange={handleChange}
-                placeholder="Internal notes about this client or project..."
-                className="min-h-[80px]"
-              />
             </div>
 
             {createMutation.error && (

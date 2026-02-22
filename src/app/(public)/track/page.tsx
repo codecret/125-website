@@ -320,26 +320,30 @@ function TrackPageContent() {
                 </div>
               )}
 
-              {/* Admin notes */}
-              {data.adminNotes && (
+              {/* Notes from status updates */}
+              {data.notes && data.notes.length > 0 && (
                 <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center shrink-0">
-                      <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                      </svg>
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-white/60 text-sm font-medium mb-2">Message from our team</p>
-                      <div
-                        className="text-white/80 text-sm leading-relaxed [&_a]:text-blue-300 [&_a]:underline"
-                        dangerouslySetInnerHTML={{
-                          __html: data.adminNotes
-                            .replace(/\n/g, "<br/>")
-                            .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
-                        }}
-                      />
-                    </div>
+                  <p className="text-white/60 text-sm font-medium mb-4 uppercase tracking-wider">Notes from our team</p>
+                  <div className="space-y-4">
+                    {data.notes.map((entry, i) => (
+                      <div key={i} className="flex gap-3">
+                        <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                          <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                          </svg>
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-white/80 text-sm leading-relaxed">{entry.note}</p>
+                          <p className="text-white/30 text-xs mt-1">
+                            {new Date(entry.createdAt).toLocaleDateString(undefined, {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}

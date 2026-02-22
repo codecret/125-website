@@ -1,7 +1,7 @@
 import { router, publicProcedure } from "../init";
 import { applicationSchema, trackSchema } from "@/lib/validators";
 import { application, statusHistory } from "@/server/db/schema";
-import { eq, sql, and, like } from "drizzle-orm";
+import { eq, sql, and, like, desc } from "drizzle-orm";
 import { sendEmail } from "@/lib/email";
 import { getTrackUrl } from "@/lib/email-layout";
 
@@ -77,11 +77,11 @@ export const applicationRouter = router({
     .query(async ({ ctx, input }) => {
       const [result] = await ctx.db
         .select({
+          id: application.id,
           applicationId: application.applicationId,
           fullName: application.fullName,
           projectType: application.projectType,
           status: application.status,
-          adminNotes: application.adminNotes,
           createdAt: application.createdAt,
           updatedAt: application.updatedAt,
         })
@@ -93,6 +93,23 @@ export const applicationRouter = router({
         return null;
       }
 
-      return result;
+      // Fetch notes left by admin on status changes
+      const notes = await ctx.db
+        .select({
+          note: statusHistory.note,
+          createdAt: statusHistory.createdAt,
+        })
+        .from(statusHistory)
+        .where(
+          and(
+            eq(statusHistory.applicationUuid, result.id),
+            sql`${statusHistory.note} IS NOT NULL`,
+            sql`${statusHistory.changedBy} IS NOT NULL`
+          )
+        )
+        .orderBy(desc(statusHistory.createdAt));
+
+      const { id: _id, ...app } = result;
+      return { ...app, notes };
     }),
 });
