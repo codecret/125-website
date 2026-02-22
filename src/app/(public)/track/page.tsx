@@ -344,43 +344,6 @@ function TrackPageContent() {
                 </div>
               )}
 
-              {/* Status history / updates */}
-              {data.history && data.history.filter((h) => h.note).length > 0 && (
-                <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6">
-                  <p className="text-white/60 text-sm font-medium mb-5 uppercase tracking-wider">Updates</p>
-                  <div className="space-y-4">
-                    {data.history
-                      .filter((h) => h.note)
-                      .map((entry) => (
-                        <div key={entry.id} className="flex gap-3">
-                          <div className="flex flex-col items-center">
-                            <div className="w-2 h-2 mt-2 rounded-full bg-white/30 shrink-0" />
-                            <div className="w-px flex-1 bg-white/10 mt-1" />
-                          </div>
-                          <div className="pb-4 min-w-0 flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <Badge
-                                variant={STATUS_VARIANT[entry.toStatus as ApplicationStatus] || "secondary"}
-                                className="text-xs px-2 py-0.5 rounded-full"
-                              >
-                                {STATUS_LABELS[entry.toStatus as ApplicationStatus] || entry.toStatus}
-                              </Badge>
-                              <span className="text-white/30 text-xs">
-                                {new Date(entry.createdAt).toLocaleDateString(undefined, {
-                                  year: "numeric",
-                                  month: "short",
-                                  day: "numeric",
-                                })}
-                              </span>
-                            </div>
-                            <p className="text-white/70 text-sm leading-relaxed">{entry.note}</p>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              )}
-
               {/* Actions */}
               <div className="flex justify-center gap-4 pt-2">
                 <Link
