@@ -12,6 +12,7 @@ import {
 import { application, statusHistory, user } from "@/server/db/schema";
 import { eq, and, ilike, or, desc, count } from "drizzle-orm";
 import { sendEmail } from "@/lib/email";
+import { getTrackUrl } from "@/lib/email-layout";
 import { generateApplicationId } from "./application";
 
 export const adminRouter = router({
@@ -123,7 +124,8 @@ export const adminRouter = router({
         await sendEmail({
           to: app.email,
           subject: `Application ${app.applicationId} - Status Update`,
-          body: `Dear ${app.fullName},\n\nYour application (${app.applicationId}) status has been updated to: ${statusLabel}\n\n${input.note ? `Note: ${input.note}\n\n` : ""}You can track your application status at any time using your application ID.\n\nBest regards,\nCodecret Team`,
+          body: `Dear ${app.fullName},\n\nYour application (${app.applicationId}) status has been updated to: ${statusLabel}\n\n${input.note ? `Note: ${input.note}\n\n` : ""}You can track your application status at any time using the button below.`,
+          cta: { ctaUrl: getTrackUrl(app.applicationId) },
         });
       } catch (e) {
         console.error("Failed to send status update email:", e);
@@ -212,7 +214,8 @@ export const adminRouter = router({
         await sendEmail({
           to: input.email,
           subject: `Project Application Created - ${appId}`,
-          body: `Dear ${input.fullName},\n\nA project application has been created on your behalf. Your application ID is: ${appId}\n\nCurrent Status: ${statusLabel}\nProject Type: ${input.projectType}\nBudget: ${input.budgetRange}\nTimeline: ${input.timeline}\n\nYou can track the status of your application at any time using this ID.\n\nBest regards,\nCodecret Team`,
+          body: `Dear ${input.fullName},\n\nA project application has been created on your behalf. Your application ID is: ${appId}\n\nCurrent Status: ${statusLabel}\nProject Type: ${input.projectType}\nBudget: ${input.budgetRange}\nTimeline: ${input.timeline}\n\nYou can track the status of your application at any time using the button below.`,
+          cta: { ctaUrl: getTrackUrl(appId) },
         });
       } catch (e) {
         console.error("Failed to send notification email:", e);
@@ -264,7 +267,8 @@ export const adminRouter = router({
       await sendEmail({
         to: app.email,
         subject: input.subject,
-        body: `Dear ${app.fullName},\n\n${input.body}\n\nBest regards,\nCodecret Team`,
+        body: `Dear ${app.fullName},\n\n${input.body}`,
+        cta: { ctaUrl: getTrackUrl(app.applicationId) },
       });
 
       return { success: true };

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Logo from "@/components/Logo";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -47,6 +48,9 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <Card className="max-w-sm w-full">
         <CardHeader className="text-center">
+          <div className="flex justify-center mb-3">
+            <Logo color="#3139fb" />
+          </div>
           <CardTitle className="text-2xl">Admin Login</CardTitle>
         </CardHeader>
         <CardContent>

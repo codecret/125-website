@@ -3,6 +3,7 @@ import { applicationSchema, trackSchema } from "@/lib/validators";
 import { application, statusHistory } from "@/server/db/schema";
 import { eq, sql, and, like } from "drizzle-orm";
 import { sendEmail } from "@/lib/email";
+import { getTrackUrl } from "@/lib/email-layout";
 
 export async function generateApplicationId(
   db: any
@@ -60,7 +61,8 @@ export const applicationRouter = router({
         await sendEmail({
           to: input.email,
           subject: `Application Received - ${appId}`,
-          body: `Dear ${input.fullName},\n\nThank you for submitting your project application. Your application ID is: ${appId}\n\nYou can track the status of your application at any time using this ID.\n\nProject Type: ${input.projectType}\nBudget: ${input.budgetRange}\nTimeline: ${input.timeline}\n\nWe will review your application and get back to you soon.\n\nBest regards,\nCodecret Team`,
+          body: `Dear ${input.fullName},\n\nThank you for submitting your project application. Your application ID is: ${appId}\n\nProject Type: ${input.projectType}\nBudget: ${input.budgetRange}\nTimeline: ${input.timeline}\n\nWe will review your application and get back to you soon. You can track the status of your application at any time using the button below.`,
+          cta: { ctaUrl: getTrackUrl(appId) },
         });
       } catch (e) {
         // Don't fail the submission if email fails

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { trpc } from "@/trpc/client";
 import { Badge } from "@/components/ui/badge";
 import { STATUS_VALUES, STATUS_LABELS, type ApplicationStatus } from "@/lib/validators";
@@ -53,9 +54,19 @@ const STATUS_ICONS: Record<string, React.ReactNode> = {
 const PROGRESS_STATUSES = STATUS_VALUES.filter((s) => s !== "rejected");
 
 export default function TrackPage() {
+  const searchParams = useSearchParams();
   const [applicationId, setApplicationId] = useState("");
   const [searchId, setSearchId] = useState("");
   const [error, setError] = useState("");
+
+  // Auto-fill and search when ?id= is present in the URL (e.g. from email CTA)
+  useEffect(() => {
+    const idParam = searchParams.get("id")?.trim().toUpperCase();
+    if (idParam && /^CC-\d{4}-\d{4}$/.test(idParam)) {
+      setApplicationId(idParam);
+      setSearchId(idParam);
+    }
+  }, [searchParams]);
 
   const { data, isLoading, isError } = trpc.application.track.useQuery(
     { applicationId: searchId },
@@ -92,7 +103,7 @@ export default function TrackPage() {
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Nav */}
         <div className="flex items-center justify-between px-6 sm:px-10 py-5">
-          <Link href="/">
+          <Link href="/" className="block [&_svg]:w-[70px]">
             <Logo color="#fff" />
           </Link>
           <Link
@@ -310,11 +321,16 @@ export default function TrackPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                       </svg>
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <p className="text-white/60 text-sm font-medium mb-2">Message from our team</p>
-                      <p className="text-white/80 text-sm whitespace-pre-wrap leading-relaxed">
-                        {data.adminNotes}
-                      </p>
+                      <div
+                        className="text-white/80 text-sm leading-relaxed [&_a]:text-blue-300 [&_a]:underline"
+                        dangerouslySetInnerHTML={{
+                          __html: data.adminNotes
+                            .replace(/\n/g, "<br/>")
+                            .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
