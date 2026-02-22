@@ -40,7 +40,7 @@ function ctaButtonHtml(url: string, label: string): string {
   const safeLabel = escapeHtml(label);
   return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin: 24px auto 8px;">
   <tr>
-    <td align="center" style="background-color: #3139fb; border-radius: 8px;">
+    <td align="center" style="background-color: #313afb; border-radius: 8px;">
       <a href="${safeUrl}" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 32px; color: #ffffff; font-size: 15px; font-weight: 600; text-decoration: none; letter-spacing: 0.3px;">
         ${safeLabel}
       </a>
@@ -99,7 +99,7 @@ export function wrapEmailHtml(body: string, options?: EmailLayoutOptions): strin
               ${contentHtml}
               ${ctaHtml}
               <p style="margin: 1.5em 0 0; padding-top: 1em; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
-                Best regards,<br/><strong>125 by Codecret</strong>
+                Best regards,<br/><strong>125 Solutions</strong>
               </p>
             </td>
           </tr>

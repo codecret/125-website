@@ -1,7 +1,7 @@
 import { router, publicProcedure } from "../init";
 import { applicationSchema, trackSchema } from "@/lib/validators";
 import { application, statusHistory } from "@/server/db/schema";
-import { eq, sql, and, like } from "drizzle-orm";
+import { eq, sql, and, like, desc } from "drizzle-orm";
 import { sendEmail } from "@/lib/email";
 import { getTrackUrl } from "@/lib/email-layout";
 
@@ -77,6 +77,7 @@ export const applicationRouter = router({
     .query(async ({ ctx, input }) => {
       const [result] = await ctx.db
         .select({
+          id: application.id,
           applicationId: application.applicationId,
           fullName: application.fullName,
           projectType: application.projectType,
@@ -93,6 +94,18 @@ export const applicationRouter = router({
         return null;
       }
 
-      return result;
+      const history = await ctx.db
+        .select({
+          id: statusHistory.id,
+          toStatus: statusHistory.toStatus,
+          note: statusHistory.note,
+          createdAt: statusHistory.createdAt,
+        })
+        .from(statusHistory)
+        .where(eq(statusHistory.applicationUuid, result.id))
+        .orderBy(desc(statusHistory.createdAt));
+
+      const { id: _id, ...app } = result;
+      return { ...app, history };
     }),
 });
