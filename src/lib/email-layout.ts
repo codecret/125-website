@@ -88,7 +88,7 @@ export function wrapEmailHtml(body: string, options?: EmailLayoutOptions): strin
       <td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 560px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden;">
           <tr>
-            <td style="padding: 32px 32px 24px; background: linear-gradient(135deg, #1f2937 0%, #111827 100%); text-align: center;">
+            <td style="padding: 32px 32px 24px; background-color: #313afb; text-align: center;">
               <a href="${escapeHtml(getSiteUrl())}" target="_blank" rel="noopener" style="display: inline-block;">
                 <img src="${escapeHtml(logoUrl)}" alt="125" width="180" height="71" style="display: block; max-width: 180px; height: auto;" />
               </a>
@@ -98,7 +98,7 @@ export function wrapEmailHtml(body: string, options?: EmailLayoutOptions): strin
             <td style="padding: 24px 32px 32px;">
               ${contentHtml}
               ${ctaHtml}
-              <p style="margin: 1.5em 0 0; padding-top: 1em; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
+              <p style="margin: 1.5em 0 0; padding-top: 1em; border-top: 1px solid #313afb33; color: #6b7280; font-size: 14px;">
                 Best regards,<br/><strong>125 Solutions</strong>
               </p>
             </td>

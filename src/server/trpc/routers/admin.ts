@@ -104,6 +104,7 @@ export const adminRouter = router({
         .update(application)
         .set({
           status: input.status,
+          ...(input.note ? { adminNotes: input.note } : {}),
           updatedAt: new Date(),
         })
         .where(eq(application.id, input.id));
